@@ -172,6 +172,10 @@
         margin-right: 5rem;
     }
 
+    .userinfo {
+        margin-right: 5rem;
+    }
+
     .menulist {
         display: none;
     }
@@ -218,7 +222,31 @@
 }
 
 @media (max-width: 600px) {
+    .header {
+        padding: 0.9rem 0;
+    }
+    
     .authlink {
         display: none;
+    }
+
+  .info {
+    width: 14.2rem;
+    height: auto;
+    padding: 0.5rem 1rem;
+  }
+
+  .companies,
+  .limit {
+    flex-wrap: wrap;
+  }
+
+    .userinfo {
+        display: none;
+    }
+
+    .navigation {
+        flex: 0 1 65%;
+        justify-content: start;
     }
 }
