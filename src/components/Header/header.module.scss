@@ -12,6 +12,13 @@
     }
 }
 
+.navigation {
+    flex: 0 1 59%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .menulist {
     display: flex;
     align-items: center;
@@ -34,7 +41,7 @@
 }
 
 .authblock {
-    display: flex;
+    display: none;
     align-items: center;
 }
 
@@ -64,6 +71,95 @@
     &:hover {
         background-color: #029491;
         color: #ffffff;
+    }
+}
+
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info {
+    width: 17.5rem;
+    height: 6.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7rem;
+    border-radius: 0.5rem;
+    background-color:#f4f4f4;
+    
+}
+
+.companies,
+.limit {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    p {
+        opacity: 0.3;
+        font-size: 1rem;
+        color: #000000;
+    }
+    span {
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+}
+
+.companies {
+    span {
+        color: #000000;
+    }
+}
+
+.limit {
+    span {
+        color: #8AC540;
+    }
+}
+
+.userinfo {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.usertext {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+}
+
+.username {
+    font-size: 1.4rem;
+    color: #000000;
+}
+
+.logout {
+    font-size: 1rem;
+    color: #000000;
+    opacity: 0.4;
+    background-color: #ffffff;
+    transition: all 0.5s ease;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navigation {
+        flex: 0 1 78%;
+    }
+
+    .authlink {
+        margin-right: 1rem;
+        padding: 0.4rem 1rem 0.4rem 0;
+        font-size: 1.4rem;
     }
 }
 
