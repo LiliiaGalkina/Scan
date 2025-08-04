@@ -1,11 +1,18 @@
-
-import './App.css'
+import "./reset.scss";
+import "./App.scss";
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
+import Footer from "./components/Footer/Footer";
 
 function App() {
 
 
   return (
-   <div></div>
+   <div className="wrapper">
+    <Header/>
+   <Main/>
+   <Footer/>
+   </div>
   )
 }
 

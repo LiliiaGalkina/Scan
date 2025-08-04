@@ -1,0 +1,17 @@
+body {
+    line-height: 100%;
+    font-family: "Inter", sans-serif;;
+}
+
+.wrapper {
+    overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 135rem;
+    padding: 0 1.5rem;
+}
