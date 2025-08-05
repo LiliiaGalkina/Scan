@@ -1,5 +1,4 @@
 .items {
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,7 +152,7 @@
 
 @media (max-width: 1024px) {
     .navigation {
-        flex: 0 1 78%;
+        flex: 0 1 76%;
     }
 
     .authlink {
@@ -164,6 +163,10 @@
 }
 
 @media (max-width: 768px) {
+    .header {
+        padding: 1.5rem 0;
+    }
+
     .logo {
         max-width: 11.1rem;
     }
@@ -183,8 +186,8 @@
     .burger {
 		display: block;
 		position: absolute;
-		top: 2.5rem;
-		right: 0;
+		top: 4rem;
+		right: 1.5rem;
 		width: 3rem;
 		height: 2.5rem;
 		z-index: 5;
@@ -219,18 +222,56 @@
 	.burger::after {
 		bottom: 0;
 	}
+
+    .burgeractive span {
+		transform: scale(0);
+	}
+	
+	.burgeractive::before {
+		background-color: #fff;
+		transform: rotate(45deg);
+		top: 11px;
+	}
+	
+	.burgeractive::after {
+		background-color: #fff;
+		transform: rotate(-45deg);
+		bottom: 9px;
+	}
+	
+	.menuactive {
+		position: absolute;
+		z-index: 4;
+		display: block;
+		overflow: auto;
+		top: 0;
+		left: 0;
+		background-color: #029491;
+		width: 100vw;
+		height: 100vh;
+		padding: 10rem 0;
+		text-align: center;
+		transition: all 0.5s ease;
+		.menuitem {
+			&:not(:last-child){
+				margin-right: 0;
+				margin-bottom: 6rem;
+			}
+		}
+		.menulink {
+			font-size: 4rem;
+			color: #ffffff;
+		}
+	}
 }
 
 @media (max-width: 600px) {
-    .header {
-        padding: 0.9rem 0;
-    }
-    
     .authlink {
         display: none;
     }
 
   .info {
+    margin-left: 2rem;
     width: 14.2rem;
     height: auto;
     padding: 0.5rem 1rem;

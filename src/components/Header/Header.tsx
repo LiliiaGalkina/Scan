@@ -2,18 +2,24 @@ import style from "./header.module.scss";
 import allstyle from "../allstyle.module.scss";
 import logo from "./img/logo.svg";
 import user from "./img/user.svg";
+import { useState } from "react";
 
 export default function Header() {
-    <div id="burger" className={style.burger}><span></span></div>
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleMenuOpen = () => {
+        setIsMenuOpen(!isMenuOpen);
+    }
+
     return (
-        <header>
+        <header className={style.header}>
             <div className="container">
                 <div className={style.items}>
                     <div className={style.logo}><img src={logo} alt="логотип"/></div>
                     <div className={style.navigation}>
                     <nav className={style.menu}>
-                            <div id="burger" className={style.burger}><span></span></div>
-                            <ul className={style.menulist}>
+                            <div className={`${style.burger} ${isMenuOpen ? style.burgeractive : ""}`} onClick={handleMenuOpen}><span></span></div>
+                            <ul className={`${style.menulist} ${isMenuOpen ? style.menuactive : ""}`}>
                                 <li className={style.menuitem}>
                                     <a href="#" className={style.menulink}>Главная</a>
                                 </li>
