@@ -1,9 +1,61 @@
 import { Link } from "react-router-dom";
 import allstyle from "../../allstyle.module.scss";
 import style from "./mainpage.module.scss";
-import hero from "./img/hero.png"
+import hero from "./img/hero.png";
+import watch from "./img/watch.svg";
+import loupe from "./img/loupe.svg";
+import lock from "./img/lock.svg";
+import { useRef } from "react";
+import arrowleft from "./img/arrowleft.svg";
+import arrowright from "./img/arrowright.svg";
+
+interface SliderItem {
+    icon: string;
+    text: string;
+}
 
 export default function MainPage() {
+const sliderRef = useRef<HTMLDivElement | null>(null);
+
+const leftMove = () : void => {
+    if(sliderRef.current) {
+        sliderRef.current.scrollLeft -= window.innerWidth / 3;
+    }
+}
+
+const rightMove = () : void => {
+    if(sliderRef.current) {
+        sliderRef.current.scrollLeft += window.innerWidth / 3;
+    }
+}
+
+const slides:SliderItem[] = [
+    {
+        icon: watch,
+        text: "Высокая и оперативная скорость обработки заявки"
+    },
+     {
+        icon: loupe,
+        text: "Огромная комплексная база данных, обеспечивающая объективный ответ на запрос"
+    },
+     {
+        icon: lock,
+        text: "Защита конфеденциальных сведений, не подлежащих разглашению по федеральному законодательству"
+    },
+     {
+        icon: watch,
+        text: "Высокая и оперативная скорость обработки заявки"
+    },
+     {
+        icon: loupe,
+        text: "Огромная комплексная база данных, обеспечивающая объективный ответ на запрос"
+    },
+     {
+        icon: lock,
+        text: "Защита конфеденциальных сведений, не подлежащих разглашению по федеральному законодательству"
+    },
+]
+
     return (
         <main className={style.main}>
             <div className="container">
@@ -18,6 +70,22 @@ export default function MainPage() {
                         <img src={hero} alt="схемотичный рисунок женщины с прозрачными окошками" />
                     </div>
                 </div>
+                </section>
+                <section className={style.whywe}>
+                    <h2 className={`${allstyle.title} ${style.subtitle}`}>Почему именно мы</h2>
+                    <div className={style.slider}>
+                    <div className={style.arrowleft} onClick={leftMove}>
+                        <img src={arrowleft} alt="стрелка влево" role="button" />
+                    </div>
+                    <div className={style.slideritems}>
+                        {slides.map((item, index) => 
+                            <div key={index}>
+                                <img src={item.icon} className={style.slidericon} alt="иконка"/>
+                                <div className={style.slidertext}>{item.text}</div>
+                            </div>
+                        )}
+                    </div>
+                    </div>
                 </section>
             </div>
         </main>
