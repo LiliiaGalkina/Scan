@@ -43,8 +43,12 @@
     display: none;
 }
 
-.authblock {
+.authblockmobile {
     display: none;
+}
+
+.authblock {
+    display: flex;
     align-items: center;
 }
 
@@ -128,6 +132,10 @@
     display: flex;
     gap: 0.4rem;
     align-items: center;
+}
+
+.userinfomobile {
+    display: none;
 }
 
 .usertext {
@@ -270,8 +278,27 @@
 }
 
 @media (max-width: 600px) {
-    .authlink {
+    .authblock {
         display: none;
+    }
+
+    .authblockmobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-size: 2.2rem;
+    }
+
+    .authlinkmobile {
+        padding-right: 1rem;
+        color: #ffffff;
+        border-right: 0.2rem solid #ffffff;
+    }
+
+    .authbuttonmobile {
+        padding: 0.5rem 1rem;
+        font-size: 2rem;
     }
 
   .info {
@@ -288,6 +315,35 @@
 
     .userinfo {
         display: none;
+    }
+
+    .userinfomobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-size: 2rem;
+    }
+
+    .usertextmobile {
+        margin-right: 1rem;
+    }
+
+    .logoutmobile {
+        padding: 0.5rem ;
+        font-size: 2rem;
+        border-radius: 1rem;
+    }
+
+    .usernamemobile {
+        margin-bottom: 1rem;
+    }
+
+    .imagemobile {
+        width: 8rem;
+        img {
+            width: 100%;
+        }
     }
 
     .navigation {
