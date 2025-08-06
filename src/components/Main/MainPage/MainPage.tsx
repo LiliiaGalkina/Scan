@@ -8,6 +8,7 @@ import lock from "./img/lock.svg";
 import { useRef } from "react";
 import arrowleft from "./img/arrowleft.svg";
 import arrowright from "./img/arrowright.svg";
+import whyusimage from "./img/whywe.svg"
 
 interface SliderItem {
     icon: string;
@@ -19,7 +20,7 @@ const sliderRef = useRef<HTMLDivElement | null>(null);
 
 const leftMove = () : void => {
     if(sliderRef.current) {
-        sliderRef.current.scrollLeft -= window.innerWidth / 3;
+        sliderRef.current.scrollLeft -= window.innerWidth / 3
     }
 }
 
@@ -74,17 +75,23 @@ const slides:SliderItem[] = [
                 <section className={style.whywe}>
                     <h2 className={`${allstyle.title} ${style.subtitle}`}>Почему именно мы</h2>
                     <div className={style.slider}>
-                    <div className={style.arrowleft} onClick={leftMove}>
-                        <img src={arrowleft} alt="стрелка влево" role="button" />
+                        <div className={style.arrowleft} onClick={leftMove}>
+                            <img src={arrowleft} alt="стрелка влево" role="button" />
+                        </div>
+                        <div className={style.slideritems} ref={sliderRef}>
+                            {slides.map((item, index) => 
+                                <div key={index} className={style.slideritem}>
+                                    <img src={item.icon} className={style.slidericon} alt="иконка"/>
+                                    <div className={style.slidertext}>{item.text}</div>
+                                </div>
+                            )}
+                        </div>
+                        <div className={style.arrowright} onClick={rightMove}>
+                            <img src={arrowright} alt="стрелка вправо" role="button" />
+                        </div>
                     </div>
-                    <div className={style.slideritems}>
-                        {slides.map((item, index) => 
-                            <div key={index}>
-                                <img src={item.icon} className={style.slidericon} alt="иконка"/>
-                                <div className={style.slidertext}>{item.text}</div>
-                            </div>
-                        )}
-                    </div>
+                    <div className={style.whyweimage}>
+                        <img src={whyusimage} alt="почему мы картиника" />
                     </div>
                 </section>
             </div>
