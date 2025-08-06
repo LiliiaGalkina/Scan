@@ -4,6 +4,7 @@ import style from "./mainpage.module.scss";
 import hero from "./img/hero.png";
 import whyusimage from "./img/whywe.svg"
 import Slider from "./Slider/Slider";
+import TarifList from "./TarifList/TarifList";
 
 
 
@@ -29,6 +30,12 @@ export default function MainPage() {
                    <Slider/>
                     <div className={style.whyweimage}>
                         <img src={whyusimage} alt="почему мы картиника" />
+                    </div>
+                </section>
+                <section className={style.tarif}>
+                    <div className="container">
+                        <h2 className={`${allstyle.title} ${style.subtitle}`}>наши тарифы</h2>
+                       <TarifList/>
                     </div>
                 </section>
             </div>
