@@ -1,29 +1,14 @@
 .slider {
     margin-bottom: 7rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
+    width: 100%; 
 }
 
-.slideritems {
-   // padding: 1rem;
-    display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.slideritems::-webkit-scrollbar {
-    display: none;
-}
 
 .slideritem {
-    margin: 1rem;
-    min-width: 31%;
+    margin: 2rem;
+    max-width: 41rem;
     min-height: 22.5rem;
     padding: 3rem 2rem;
-    scroll-snap-align: start center;
     border-radius: 1rem;
     box-shadow: 0px 0px 2rem 0px #cccccc;
     font-size: 1.8rem;

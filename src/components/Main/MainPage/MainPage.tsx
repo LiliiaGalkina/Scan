@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import style from "./mainpage.module.scss";
 import hero from "./img/hero.png";
 import whyusimage from "./img/whywe.svg"
-import Slider from "./Slider/Slider";
+import SliderCustom from "./Slider/Slider";
 import TarifList from "./TarifList/TarifList";
 import allstyle from "../allstyle.module.scss"
 
@@ -27,7 +27,7 @@ export default function MainPage() {
                 </section>
                 <section className={style.whywe}>
                     <h2 className={`${allstyle.title} ${style.subtitle}`}>Почему именно мы</h2>
-                   <Slider/>
+                   <SliderCustom/>
                     <div className={style.whyweimage}>
                         <img src={whyusimage} alt="почему мы картиника" />
                     </div>
