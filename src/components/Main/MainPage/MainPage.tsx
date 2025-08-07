@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import allstyle from "../../allstyle.module.scss";
 import style from "./mainpage.module.scss";
 import hero from "./img/hero.png";
 import whyusimage from "./img/whywe.svg"
 import Slider from "./Slider/Slider";
 import TarifList from "./TarifList/TarifList";
+import allstyle from "../allstyle.module.scss"
 
 
 

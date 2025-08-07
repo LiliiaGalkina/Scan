@@ -1,0 +1,186 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem #cccccc;
+}
+
+.cardheader {
+    position: relative;
+    height: 13.2rem;
+    padding: 3rem 3rem 3.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.cardtitle {
+    margin-top: 1.9rem;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 1%;
+}
+
+.cardtext {
+    font-size: 1.8rem;
+    letter-spacing: 1%;
+}
+
+.cardimage {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.57rem;
+    max-width: 9.6rem;
+    img {
+        width: 100%;
+    }
+}
+
+.cardbody {
+    position: relative;
+    padding: 3.3rem 3rem 2.4rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 0 1rem 1rem;
+     letter-spacing: 1%;
+}
+
+.priceblock {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    margin-right: 1.9rem;
+    font-size: 3rem;
+    font-weight: 500;
+   
+}
+
+.oldprice {
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.beige {
+    position: absolute;
+    top: 1.2rem;
+    right: 1rem;
+    padding: 0.3rem 1.3rem 0.4rem;
+    background-color: #3BA5E0;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+.dopindo {
+    margin-right: -1.9rem;
+    margin-bottom: 5.9rem;
+    font-size: 1.8rem;
+}
+
+.bodytext {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.tarifoptions {
+    margin-bottom: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tarifoption {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.8rem;
+}
+
+.tarifbutton {
+    margin-top: auto;
+    width: 100%;
+    height: 5.9rem;
+    font-size: 2rem;
+    transition: all 0.5s ease;
+
+    &:hover {
+        box-shadow: 0 0 1rem #000000;
+    }
+}
+
+
+@media (max-width: 1320px) {
+    .cardtitle {
+        margin-bottom: 2rem;
+    }
+    .cardbody {
+        padding: 3.3rem 2rem 2.4rem;
+    }
+
+    .tarifoption {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 1120px) {
+    .dopindo {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardheader {
+        padding: 2rem 2rem 3.4rem;
+    }
+    .cardtitle {
+        margin-bottom: 2.2rem;
+        margin-right: -2rem;
+        font-size: 2rem;
+    }
+
+    .cardtext {
+        font-size: 1.8rem;
+    }
+
+    .cardimage {
+        max-width: 7.3rem;
+    }
+
+    .beige {
+        display: none;
+    }
+
+    .cardbody {
+        padding: 2rem 2.4rem 3.1rem;
+    }
+
+    .bodyinfo {
+        font-size: 1.8rem;
+    }
+
+   .dopindo {
+    margin-bottom: 3.6rem;
+   }
+
+    .tarifoption {
+        font-size: 1.6rem;
+    }
+
+    .tarifoptions {
+        margin-bottom: 3.9rem;
+    }
+
+    .tarifbutton {
+        font-size: 1.8rem;
+    }
+}

@@ -59,9 +59,19 @@
 }
 
 .whyweimage {
+    height: 57.5rem;
     img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0;
     }
+}
+
+/*tarif*/
+
+.tarif {
+    padding: 5.4rem 0;
 }
 
 @media (max-width: 1200px) {
@@ -97,6 +107,10 @@
       .slideritem {
         flex: 0 0 30%;
     }
+
+       .whyweimage {
+        height: 46rem;
+    }
 }
 
 @media (max-width: 840px) {
@@ -123,6 +137,16 @@
     .herotext {
         max-width: 100%;
     }
+
+    
+ 
+   
+}
+
+@media (max-width: 600px) {
+    .whyweimage {
+        height: 50rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -131,7 +155,13 @@
         padding-top: 0;
     }
     }
-    .maintitle {
+    .maintitle,
+    .subtitle {
+        margin-bottom: 3.7rem;
         font-size: 2.8rem;
+    }
+
+    .whyweimage {
+        height: 39.3rem;
     }
 }

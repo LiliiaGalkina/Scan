@@ -1,5 +1,5 @@
 import style from "./header.module.scss"
-import allstyle from "../allstyle.module.scss";
+import allstyle from "../Main/allstyle.module.scss";
 import logo from "./img/logo.svg";
 import user from "./img/user.svg";
 import { useState } from "react";

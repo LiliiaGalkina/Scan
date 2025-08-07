@@ -20,7 +20,7 @@
 
 .slideritem {
     margin: 1rem;
-    flex: 0 0 31%;
+    min-width: 31%;
     min-height: 22.5rem;
     padding: 3rem 2rem;
     scroll-snap-align: start center;
@@ -43,4 +43,46 @@
         width: 100%;
     }
     
+}
+
+@media (max-width: 1200px) {
+    .slidericon {
+        width: 5.4rem;
+    }
+
+    .slideritem {
+           min-width: 30.7%;
+      padding: 3rem 1rem;
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 1080px) {
+    .slideritem {
+        min-width: 30.4%;
+    }
+}
+
+@media (max-width: 960px) {
+     .slideritem {
+        min-width: 30%;
+    }
+}
+
+@media (max-width: 870px) {
+      .slideritem {
+        min-width: 46.5%;
+    }
+}
+
+@media (max-width: 768px) {
+      .slideritem {
+        min-width: 46%;
+    }
+}
+
+@media (max-width: 680px) {
+       .slideritem {
+        min-width: 97%;
+    }
 }
