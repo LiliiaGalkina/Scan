@@ -5,11 +5,14 @@
 }
 
 .logo {
+    position: relative;
     max-width: 14.1rem;
+    z-index: 7;
     img {
         width: 100%;
     }
 }
+
 
 .navigation {
     flex: 0 1 59%;
@@ -261,17 +264,20 @@
 		background-color: #029491;
 		width: 100vw;
 		height: 100vh;
-		padding: 10rem 0;
+		padding-top: 13.8rem;
 		text-align: center;
 		transition: all 0.5s ease;
 		.menuitem {
 			&:not(:last-child){
 				margin-right: 0;
-				margin-bottom: 6rem;
+				margin-bottom: 2.6rem;
 			}
+            &:last-child {
+                margin-top: 7.5rem;
+            }
 		}
 		.menulink {
-			font-size: 4rem;
+			font-size: 1.6rem;
 			color: #ffffff;
 		}
 	}
@@ -284,21 +290,25 @@
 
     .authblockmobile {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 1rem;
+        gap: 2.05rem;
         font-size: 2.2rem;
     }
 
     .authlinkmobile {
-        padding-right: 1rem;
+       font-size: 1.6rem;
         color: #ffffff;
-        border-right: 0.2rem solid #ffffff;
+        opacity: 0.4;
     }
 
     .authbuttonmobile {
-        padding: 0.5rem 1rem;
-        font-size: 2rem;
+       width: 29.5rem;
+       height: 5.19rem;
+       background-color: #7CE3E1;
+       font-size: 2rem;
+       font-weight: 500;
     }
 
   .info {
@@ -326,17 +336,20 @@
     }
 
     .usertextmobile {
-        margin-right: 1rem;
+        margin-right: 2rem;
     }
 
     .logoutmobile {
-        padding: 0.5rem ;
+        width: 20rem;
+        height: 5rem;
+        background-color: #7CE3E1;
         font-size: 2rem;
         border-radius: 1rem;
     }
 
     .usernamemobile {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.7;
     }
 
     .imagemobile {

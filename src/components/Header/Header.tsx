@@ -1,27 +1,44 @@
 import style from "./header.module.scss"
 import allstyle from "../Main/allstyle.module.scss";
-import logo from "./img/logo.svg";
+import logo from "./img/logo.png";
+import logomain from "./img/logo.svg";
 import user from "./img/user.svg";
 import { useState } from "react";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const userinf = true;
+    const [logoImg, setLogoImg] = useState(logomain);
+
+    const userinf = false;
 
     const handleMenuOpen = () => {
         setIsMenuOpen(!isMenuOpen);
+        if(logoImg === logomain){
+            setLogoImg(logo);
+        } else {
+            setLogoImg(logomain);
+        }
     }
 
     return (
         <header className={style.header}>
             <div className="container">
                 <div className={style.items}>
-                    <div className={style.logo}><img src={logo} alt="логотип"/></div>
+                    <div className={style.logo}><img src={logoImg} alt="логотип"/></div>
                     <div className={style.navigation}>
                         <nav className={style.menu}>
                                 <div className={`${style.burger} ${isMenuOpen ? style.burgeractive : ""}`} onClick={handleMenuOpen}><span></span></div>
                                 <ul className={`${style.menulist} ${isMenuOpen ? style.menuactive : ""}`}>
-                                    {!userinf &&
+                                    <li className={style.menuitem}>
+                                        <a href="#" className={style.menulink}>Главная</a>
+                                    </li>
+                                    <li className={style.menuitem}>
+                                        <a href="#" className={style.menulink}>Тарифы</a>
+                                    </li>
+                                    <li className={style.menuitem}>
+                                        <a href="#" className={style.menulink}>FAQ</a>
+                                    </li>
+                                     {!userinf &&
                                         <li className={style.menuitem}><div className={style.authblockmobile}>
                                         <a href="#" className={style.authlinkmobile}>Зарегистрироваться</a>
                                         <button className={`${style.authbuttonmobile} ${allstyle.button}`}>Войти</button>
@@ -39,15 +56,6 @@ export default function Header() {
 
                                     </li>
                                     }
-                                    <li className={style.menuitem}>
-                                        <a href="#" className={style.menulink}>Главная</a>
-                                    </li>
-                                    <li className={style.menuitem}>
-                                        <a href="#" className={style.menulink}>Тарифы</a>
-                                    </li>
-                                    <li className={style.menuitem}>
-                                        <a href="#" className={style.menulink}>FAQ</a>
-                                    </li>
                                 </ul>
                         </nav>
                         {userinf && 
