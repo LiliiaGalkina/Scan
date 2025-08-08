@@ -1,167 +1,170 @@
 .main {
-    padding: 5.1rem 0 5.4rem;
+  padding: 5.1rem 0 5.4rem;
 }
 
 .items {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 2.4rem;
 }
 
 .item {
-    &:first-child {
-        padding-top: 1.8rem;
-    }
+  &:first-child {
+    padding-top: 1.8rem;
+  }
 
-    &:last-child {
-        max-width: 48%;
-        img {
-            width: 100%;
-        }
+  &:last-child {
+    max-width: 48%;
+    img {
+      width: 100%;
     }
+  }
 }
 
 .maintitle {
-    margin-bottom: 2rem;
-    font-size: 6rem;
+  margin-bottom: 2rem;
+  font-size: 6rem;
 }
 
 .herotext {
-    margin-bottom: 7rem;
-    max-width: 52.6rem;
-    font-size: 2rem;
+  margin-bottom: 7rem;
+  max-width: 52.6rem;
+  font-size: 2rem;
 }
 
 .herobutton {
-    max-width: 33.5rem;
-    height: 5.9rem;
-    font-size: 2.2rem;
-    font-weight: 500;
-    background-color: #5970FF;
-    color: #ffffff;
-    transition: all 0.5s ease;
+  max-width: 33.5rem;
+  height: 5.9rem;
+  font-size: 2.2rem;
+  font-weight: 500;
+  background-color: #5970ff;
+  color: #ffffff;
+  transition: all 0.5s ease;
 
-    &:hover {
-        background-color: #3242aa;
-    }
+  &:hover {
+    background-color: #3242aa;
+  }
 }
 
 /*why we*/
 
 .whywe {
-    padding: 5.4rem 0;
+  padding: 5.4rem 0;
 }
 
 .subtitle {
-    margin-bottom: 7rem;
-    font-size: 4.5rem;
+  margin-bottom: 7rem;
+  font-size: 4.5rem;
 }
 
 .whyweimage {
-    height: 57.5rem;
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 0;
-    }
+  height: 58rem;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0;
+  }
 }
 
 /*tarif*/
 
 .tarif {
-    padding: 5.4rem 0;
+  padding: 5.4rem 0;
 }
 
 @media (max-width: 1200px) {
-    .maintitle {
-        font-size: 4.4rem;
-    }
+  .maintitle {
+    font-size: 4.4rem;
+  }
 
-    .slideritem {
-        flex: 0 0 30.7%;
-    }
+  .slideritem {
+    flex: 0 0 30.7%;
+  }
 
-    .slidericon {
-        margin-bottom: 1.9rem;
-        width: 5.6rem;
-}
-
+  .slidericon {
+    margin-bottom: 1.9rem;
+    width: 5.6rem;
+  }
 }
 
 @media (max-width: 1024px) {
-    .items {
-      align-items: center;
-    }
-    .maintitle,
-    .subtitle {
-        font-size: 3.6rem;
-    }
+  .items {
+    align-items: center;
+  }
+  .maintitle,
+  .subtitle {
+    font-size: 3.6rem;
+  }
 
-    .herotext {
-        margin-bottom: 5rem;
-        font-size: 1.8rem;
-    }
+  .herotext {
+    margin-bottom: 5rem;
+    font-size: 1.8rem;
+  }
 
-      .slideritem {
-        flex: 0 0 30%;
-    }
+  .slideritem {
+    flex: 0 0 30%;
+  }
 
-       .whyweimage {
-        height: 46rem;
-    }
+  .whyweimage {
+    height: 46rem;
+  }
 }
 
 @media (max-width: 840px) {
-      .slideritem {
-        flex: 0 0 4%;
-    }
+  .slideritem {
+    flex: 0 0 4%;
+  }
 }
 
 @media (max-width: 768px) {
-    .main {
-        padding: 2rem 0 2.8rem;
-    }
-    .items {
-        flex-direction: column;
-        justify-content: center;
-    }
+  .main {
+    padding: 2rem 0 2.8rem;
+  }
+  .items {
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    .item {
-        &:last-child {
-            max-width: 100%;
-        }
+  .item {
+    &:last-child {
+      max-width: 100%;
     }
+  }
 
-    .herotext {
-        max-width: 100%;
-    }
-
-    
- 
-   
+  .herotext {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 600px) {
-    .whyweimage {
-        height: 50rem;
-    }
+  .whyweimage {
+    height: 50rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .item {
-          &:first-child {
-        padding-top: 0;
+  .item {
+    &:first-child {
+      padding-top: 0;
     }
-    }
-    .maintitle,
-    .subtitle {
-        margin-bottom: 3.7rem;
-        font-size: 2.8rem;
-    }
+  }
+  .maintitle,
+  .subtitle {
+    margin-bottom: 3.7rem;
+    font-size: 2.8rem;
+  }
 
-    .whyweimage {
-        height: 39.3rem;
-    }
+  .whywe {
+    padding: 4.02rem 0;
+  }
+
+  .whyweimage {
+    height: 39.3rem;
+  }
+
+  .tarif {
+    padding: 4.02rem 0;
+  }
 }

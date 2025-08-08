@@ -59,17 +59,23 @@
     }
 }
 
+
 @media (max-width: 600px) {
+    .slider {
+        width: 96%; 
+    }
+
     .slideritem {
+        margin: 1rem;
         max-width: 96%;
+        height: 23rem;
+        padding: 3rem 1.7rem;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 400px) {
     .slideritem {
         margin: 0.8rem;
         max-width: 95%;
-        height: 23rem;
-        padding: 3rem 1.7rem;
     }
 }
