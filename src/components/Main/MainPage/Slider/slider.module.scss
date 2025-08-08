@@ -1,13 +1,12 @@
 .slider {
-    margin-bottom: 7rem;
-    width: 100%; 
+    margin: 0 auto 7rem;
+    width: 97%; 
 }
 
-
 .slideritem {
-    margin: 2rem;
-    max-width: 41rem;
-    min-height: 22.5rem;
+    margin: 1.5rem;
+    max-width: 92%;
+   height: 22.5rem;
     padding: 3rem 2rem;
     border-radius: 1rem;
     box-shadow: 0px 0px 2rem 0px #cccccc;
@@ -16,9 +15,19 @@
 
 .arrowleft,
 .arrowright {
+    position: absolute;
+    top: calc(50% - 1.95rem);
     width: 3.9rem;
     height: 3.9rem;
     cursor: pointer;
+}
+
+.arrowleft {
+    left: -0.4rem;
+}
+
+.arrowright {
+    right: -0.6rem;
 }
 
 .slidericon {
@@ -30,44 +39,37 @@
     
 }
 
-@media (max-width: 1200px) {
-    .slidericon {
-        width: 5.4rem;
-    }
-
+@media (max-width: 1100px) {
     .slideritem {
-           min-width: 30.7%;
-      padding: 3rem 1rem;
-        font-size: 1.6rem;
+        margin: 1rem;
+        max-width: 94%;
+        height: 24rem;
     }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 950px) {
     .slideritem {
-        min-width: 30.4%;
-    }
-}
-
-@media (max-width: 960px) {
-     .slideritem {
-        min-width: 30%;
-    }
-}
-
-@media (max-width: 870px) {
-      .slideritem {
-        min-width: 46.5%;
+        max-width: 95%;
     }
 }
 
 @media (max-width: 768px) {
-      .slideritem {
-        min-width: 46%;
+    .slideritem {
+        max-width: 97%;
     }
 }
 
-@media (max-width: 680px) {
-       .slideritem {
-        min-width: 97%;
+@media (max-width: 600px) {
+    .slideritem {
+        max-width: 96%;
+    }
+}
+
+@media (max-width: 600px) {
+    .slideritem {
+        margin: 0.8rem;
+        max-width: 95%;
+        height: 23rem;
+        padding: 3rem 1.7rem;
     }
 }

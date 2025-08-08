@@ -49,18 +49,33 @@ export default function SliderCustom() {
     slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: (
-      <div className={style.arrowright}>
-        <img src={arrowright} alt="стрелка вправо" />
-      </div>
-    ),
-    prevArrow: (
-      <div className={style.arrowleft}>
+      <div>
         <img
-          src={arrowleft}
-          alt="стрелка влево"
+          src={arrowright}
+          className={style.arrowright}
+          alt="стрелка вправо"
         />
       </div>
     ),
+    prevArrow: (
+      <div>
+        <img src={arrowleft} className={style.arrowleft} alt="стрелка влево" />
+      </div>
+    ),
+    responsive: [
+      {
+        breakpoint: 950,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
