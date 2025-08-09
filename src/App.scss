@@ -1,8 +1,7 @@
 @font-face {
     font-family: 'Ferry';
     font-weight: 900;
-    src: local('ferry'),
-    url("./fonts/ferry.otf") format('opentype');
+    src: url("./components/fonts/ferry.otf") format('opentype');
 }
 
 body {

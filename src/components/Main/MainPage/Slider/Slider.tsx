@@ -8,7 +8,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-
 interface SliderItem {
   icon: string;
   text: string;
@@ -42,6 +41,12 @@ export default function SliderCustom() {
     },
   ];
 
+  const SlickButtonFix = ({
+    currentSlide,
+    slideCount,
+    children,
+    ...props
+  }: any) => <div {...props}>{children}</div>;
 
   const settings = {
     dots: false,
@@ -49,18 +54,26 @@ export default function SliderCustom() {
     slidesToShow: 3,
     slidesToScroll: 1,
     nextArrow: (
-      <div>
-        <img
-          src={arrowright}
-          className={style.arrowright}
-          alt="стрелка вправо"
-        />
-      </div>
+      <SlickButtonFix>
+        <div>
+          <img
+            src={arrowright}
+            className={style.arrowright}
+            alt="стрелка вправо"
+          />
+        </div>
+      </SlickButtonFix>
     ),
     prevArrow: (
-      <div>
-        <img src={arrowleft} className={style.arrowleft} alt="стрелка влево" />
-      </div>
+      <SlickButtonFix>
+        <div>
+          <img
+            src={arrowleft}
+            className={style.arrowleft}
+            alt="стрелка влево"
+          />
+        </div>
+      </SlickButtonFix>
     ),
     responsive: [
       {
@@ -80,14 +93,14 @@ export default function SliderCustom() {
 
   return (
     <div className={style.slider}>
-      <Slider {...settings}>{
-      slides.map((item, index) => (
-    <div key={index} className={style.slideritem}>
-      <img src={item.icon} className={style.slidericon} alt="иконка" />
-      <div className={style.slidertext}>{item.text}</div>
-    </div>
-  ))
-      }</Slider>
+      <Slider {...settings}>
+        {slides.map((item, index) => (
+          <div key={index} className={style.slideritem}>
+            <img src={item.icon} className={style.slidericon} alt="иконка" />
+            <div className={style.slidertext}>{item.text}</div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 }

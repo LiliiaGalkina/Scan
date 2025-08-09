@@ -17,12 +17,6 @@ import { useEffect } from "react";
 function App() {
 	const { isAuth, checkAuth } = useAuth();
 
-	useEffect(() => {
-		if (!isAuth) {
-			console.log("Пользователю необходимо залогиниться!")
-		}
-	}, [isAuth]);
-
 	  useEffect(() => {
       checkAuth();
     }, [checkAuth]);
