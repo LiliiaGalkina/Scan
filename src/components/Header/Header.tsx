@@ -3,17 +3,21 @@ import allstyle from "../Main/allstyle.module.scss";
 import logo from "./img/logo.png";
 import logomain from "./img/logo.svg";
 import user from "./img/user.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
+
+interface IHeaderProps {
+	isAuth: boolean;
+}
 
 
-export default function Header() {
+const Header: React.FC<IHeaderProps> = ({ isAuth }) => {
+	const {setIsAuth} = useAuth()
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [logoImg, setLogoImg] = useState(logomain);
 
-    const userinf = false;
-
-    const handleMenuOpen = () => {
+       const handleMenuOpen = () => {
         setIsMenuOpen(!isMenuOpen);
         if(logoImg === logomain){
             setLogoImg(logo);
@@ -26,8 +30,31 @@ export default function Header() {
 
      const handleLoginClick = () => {
        navigate("/auth");
-       handleMenuOpen();
-     };
+      handleMenuOpen();
+	};
+	
+	useEffect(() => {
+    const interval = setInterval(() => {
+      const tokenExpire = localStorage.getItem("tokenExpire");
+      const now = new Date();
+
+      if (!tokenExpire || new Date(tokenExpire) <= now) {
+        setIsAuth(false);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("tokenExpire");
+      }
+	}, 1000 * 60);
+		
+    return () => clearInterval(interval);
+	}, []);
+	
+	const handleLogout = () => {
+		setIsAuth(false);
+		handleMenuOpen();
+    localStorage.removeItem("accessToken");
+		localStorage.removeItem("tokenExpire");
+		navigate("/");
+  };
 
     return (
       <header className={style.header}>
@@ -66,7 +93,7 @@ export default function Header() {
                       FAQ
                     </a>
                   </li>
-                  {!userinf && (
+                  {!isAuth && (
                     <li className={style.menuitem}>
                       <div className={style.authblockmobile}>
                         <a href="/auth" className={style.authlinkmobile}>
@@ -81,14 +108,14 @@ export default function Header() {
                       </div>
                     </li>
                   )}
-                  {userinf && (
+                  {isAuth && (
                     <li className={style.menuitem}>
                       <div className={style.userinfomobile}>
                         <div className={style.usertextmobile}>
                           <div className={style.usernamemobile}>
                             Алексей А.{" "}
                           </div>
-                          <button className={style.logoutmobile}>Выйти</button>
+                          <button className={style.logoutmobile} onClick={handleLogout}>Выйти</button>
                         </div>
                         <div className={style.imagemobile}>
                           <img src={user} alt="фото пользователя" />
@@ -98,7 +125,7 @@ export default function Header() {
                   )}
                 </ul>
               </nav>
-              {userinf && (
+              {isAuth && (
                 <>
                   <div className={style.info}>
                     <div className={style.companies}>
@@ -113,7 +140,7 @@ export default function Header() {
                   <div className={style.userinfo}>
                     <div className={style.usertext}>
                       <div className={style.username}>Алексей А. </div>
-                      <button className={style.logout}>Выйти</button>
+                      <button className={style.logout} onClick={handleLogout}>Выйти</button>
                     </div>
                     <div className={style.image}>
                       <img src={user} alt="фото пользователя" />
@@ -121,7 +148,7 @@ export default function Header() {
                   </div>
                 </>
               )}
-              {!userinf && (
+              {!isAuth && (
                 <div className={style.authblock}>
                   <a href="#" className={style.authlink}>
                     Зарегистрироваться
@@ -140,3 +167,5 @@ export default function Header() {
       </header>
     );
 }
+
+export default Header;

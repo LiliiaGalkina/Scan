@@ -137,6 +137,15 @@
   }
 }
 
+.wrong {
+	margin-top: -1.8rem;
+	margin-bottom: 1.4rem;
+	font-size: 1.2rem;
+	letter-spacing: 1%;
+	text-align: center;
+	color: #FF5959;
+}
+
 @media (max-width: 1024px) {
   .auth {
     grid-template-columns: repeat(2, 1fr);
