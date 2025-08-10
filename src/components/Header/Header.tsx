@@ -9,10 +9,11 @@ import { useAuth } from "../../Context/AuthContext";
 
 interface IHeaderProps {
 	isAuth: boolean;
+	userName: string;
 }
 
 
-const Header: React.FC<IHeaderProps> = ({ isAuth }) => {
+const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
 	const {setIsAuth} = useAuth()
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [logoImg, setLogoImg] = useState(logomain);
@@ -113,7 +114,7 @@ const Header: React.FC<IHeaderProps> = ({ isAuth }) => {
                       <div className={style.userinfomobile}>
                         <div className={style.usertextmobile}>
                           <div className={style.usernamemobile}>
-                            Алексей А.{" "}
+                            {userName}
                           </div>
                           <button className={style.logoutmobile} onClick={handleLogout}>Выйти</button>
                         </div>
@@ -139,7 +140,7 @@ const Header: React.FC<IHeaderProps> = ({ isAuth }) => {
                   </div>
                   <div className={style.userinfo}>
                     <div className={style.usertext}>
-                      <div className={style.username}>Алексей А. </div>
+                      <div className={style.username}>{userName} </div>
                       <button className={style.logout} onClick={handleLogout}>Выйти</button>
                     </div>
                     <div className={style.image}>

@@ -11,11 +11,11 @@ import Autification from "./components/Main/Autification/Autification";
 import Search from "./components/Main/Search";
 import Result from "./components/Main/Result";
 import { useAuth } from "./Context/AuthContext";
-import { useEffect } from "react";
+import { useEffect} from "react";
 
 
 function App() {
-	const { isAuth, checkAuth } = useAuth();
+	const { isAuth, checkAuth, userName } = useAuth();
 
 	  useEffect(() => {
       checkAuth();
@@ -24,7 +24,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        <Header isAuth={isAuth} />
+			  <Header isAuth={isAuth} userName={userName} />
         <Routes>
           <Route path="/" element={<MainPage isAuth={isAuth} />} />
           <Route path="/auth" element={<Autification />} />

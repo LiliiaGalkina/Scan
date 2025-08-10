@@ -20,7 +20,7 @@ interface IAuthRes {
 }
 
 const Autification: React.FC<IAutificationProps> = () => {
-  const { isAuth, setIsAuth } = useAuth();
+  const { isAuth, setIsAuth, setUserName } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWrong, setUsernameWrong] = useState(false);
@@ -58,7 +58,8 @@ const Autification: React.FC<IAutificationProps> = () => {
       if (response.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("tokenExpire", data.expire);
-        setIsAuth(true);
+		  setIsAuth(true);
+		  setUserName(username);
         navigate("/");
       } else {
         throw new Error(data.message || "Ошибка при входе");

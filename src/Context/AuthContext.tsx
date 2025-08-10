@@ -4,12 +4,15 @@ interface IAuthContext {
 	isAuth: boolean;
 	setIsAuth: (value: boolean) => void;
 	checkAuth: () => void;
+	userName: string;
+	setUserName: (value: string) => void;
 }
 
 const AuthContext = createContext<IAuthContext | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isAuth, setIsAuth] = useState<boolean>(false);
+	const [isAuth, setIsAuth] = useState(false);
+	const [userName, setUserName] = useState("");
 
    const checkAuth = () => {
      const accessToken = localStorage.getItem("accessToken");
@@ -32,14 +35,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuth, setIsAuth, checkAuth }}
+      value={{ isAuth, setIsAuth, checkAuth, userName, setUserName }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = (): IAuthContext => {
   const context = useContext(AuthContext);
 
