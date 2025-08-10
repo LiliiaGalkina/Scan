@@ -15,7 +15,7 @@ import { useEffect} from "react";
 
 
 function App() {
-	const { isAuth, checkAuth, userName } = useAuth();
+	const { isAuth, checkAuth, userName, tarif } = useAuth();
 
 	  useEffect(() => {
       checkAuth();
@@ -26,7 +26,7 @@ function App() {
       <div className="wrapper">
 			  <Header isAuth={isAuth} userName={userName} />
         <Routes>
-          <Route path="/" element={<MainPage isAuth={isAuth} />} />
+				  <Route path="/" element={<MainPage isAuth={isAuth} tarif={tarif} />} />
           <Route path="/auth" element={<Autification />} />
           <Route
             path="/search"

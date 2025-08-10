@@ -6,6 +6,8 @@ interface IAuthContext {
 	checkAuth: () => void;
 	userName: string;
 	setUserName: (value: string) => void;
+	tarif: string;
+	setTarif: (value: string) => void;
 }
 
 const AuthContext = createContext<IAuthContext | null>(null);
@@ -13,6 +15,7 @@ const AuthContext = createContext<IAuthContext | null>(null);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [isAuth, setIsAuth] = useState(false);
 	const [userName, setUserName] = useState("");
+	const [tarif, setTarif] = useState("")
 
    const checkAuth = () => {
      const accessToken = localStorage.getItem("accessToken");
@@ -35,7 +38,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuth, setIsAuth, checkAuth, userName, setUserName }}
+      value={{ isAuth, setIsAuth, checkAuth, userName, setUserName, tarif, setTarif }}
     >
       {children}
     </AuthContext.Provider>

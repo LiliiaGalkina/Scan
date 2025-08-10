@@ -20,7 +20,7 @@ interface IAuthRes {
 }
 
 const Autification: React.FC<IAutificationProps> = () => {
-  const { isAuth, setIsAuth, setUserName } = useAuth();
+  const { isAuth, setIsAuth, setUserName, setTarif } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWrong, setUsernameWrong] = useState(false);
@@ -29,10 +29,11 @@ const Autification: React.FC<IAutificationProps> = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuth) {
+	  if (isAuth) {
+		setTarif("beginner");
       navigate("/");
-	  }
-	  console.log(isAuth)
+    }
+    console.log(isAuth);
   }, [isAuth, navigate]);
 
   const handleGetLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -54,22 +55,22 @@ const Autification: React.FC<IAutificationProps> = () => {
         }
       );
 
-		const data: IAuthRes = await response.json();
+      const data: IAuthRes = await response.json();
       if (response.ok) {
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("tokenExpire", data.expire);
-		  setIsAuth(true);
-		  setUserName(username);
+        setIsAuth(true);
+        setUserName(username);
         navigate("/");
       } else {
         throw new Error(data.message || "Ошибка при входе");
       }
     } catch (error) {
-		console.error("Ошибка аутентификации:", error);
-		
+      console.error("Ошибка аутентификации:", error);
+
       setUsernameWrong(true);
       setPasswordWrong(true);
-	  }
+    }
   };
 
   const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,7 +146,7 @@ const Autification: React.FC<IAutificationProps> = () => {
                 type="submit"
                 disabled={!username || !password}
                 className={`${allstyle.button} ${style.authbutton}`}
-				style={{opacity: !username || !password ? "0.5" : "1"}}
+                style={{ opacity: !username || !password ? "0.5" : "1" }}
               >
                 Войти
               </button>

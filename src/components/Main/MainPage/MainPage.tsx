@@ -7,10 +7,11 @@ import TarifList from "./TarifList/TarifList";
 import allstyle from "../allstyle.module.scss";
 
 interface IMainProps {
-  isAuth: boolean;
+	isAuth: boolean;
+	tarif: string;
 }
 
-const MainPage: React.FC<IMainProps> = (isAuth) => {
+const MainPage: React.FC<IMainProps> = ({ isAuth, tarif }) => {
   const navigate = useNavigate();
 
   const handGoSerchClick = (): void => {
@@ -67,7 +68,7 @@ const MainPage: React.FC<IMainProps> = (isAuth) => {
             <h2 className={`${allstyle.title} ${style.subtitle}`}>
               наши тарифы
             </h2>
-            <TarifList />
+					  <TarifList isAuth={isAuth} tarif={tarif} />
           </div>
         </section>
       </div>
