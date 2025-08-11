@@ -1,0 +1,154 @@
+.search {
+  padding: 6.9rem 0 6.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.searchinfo {
+  margin-right: 1rem;
+  flex: 0 1 66%;
+}
+
+.searchimage {
+  position: relative;
+}
+
+.searchtitle {
+  margin-bottom: 2.5rem;
+  font-size: 4rem;
+  letter-spacing: 3%;
+}
+
+.text {
+  margin-bottom: 4.7rem;
+  font-size: 2rem;
+  letter-spacing: 2%;
+}
+
+.searthform {
+  position: relative;
+  padding: 3.6rem 3.4rem 3.2rem 4.4rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 2rem #cccccc;
+  letter-spacing: 3%;
+}
+
+.formdecor {
+  position: absolute;
+  top: -15.3rem;
+  right: -10.4rem;
+  width: 9.1rem;
+  img {
+    width: 100%;
+  }
+}
+
+.formblock {
+  margin-bottom: 3.9rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.input {
+  height: 4.3rem;
+  padding: 0 2.2rem;
+  border: 0.1rem solid #c7c7c7;
+  font-size: 1.4rem;
+  &::placeholder {
+    text-align: center;
+    color: #949494;
+  }
+}
+
+.inputinfo {
+  width: 24.2rem;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
+
+.checkboxitem {
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.checkbox {
+  margin-right: 1.7rem;
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 0.1rem solid #000000;
+  accent-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkboxtext {
+  font-size: 1.8rem;
+}
+
+.formfinishblock {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateblock {
+  display: flex;
+}
+
+.dateinput {
+  width: 17.6rem;
+  &:first-child {
+    margin-right: 2rem;
+  }
+}
+
+.submitbutton {
+  margin-bottom: 1rem;
+  width: 30.5rem;
+  height: 5.9rem;
+  border-radius: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 500;
+  background-color: #5970ff;
+  color: #ffffff;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: #3242aa;
+  }
+}
+
+.submintext {
+  font-size: 1.4rem;
+  color: #949494;
+}
+
+.searchimage {
+  position: relative;
+}
+
+.searchmainimg {
+  margin-right: -4.34rem;
+  max-width: 44.26rem;
+  margin-bottom: 1rem;
+}
+
+.imagedecor {
+  position: absolute;
+  top: -20.06rem;
+  right: 6.14rem;
+}
