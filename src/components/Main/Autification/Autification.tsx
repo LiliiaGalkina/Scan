@@ -33,7 +33,6 @@ const Autification: React.FC<IAutificationProps> = () => {
 		setTarif("beginner");
       navigate("/");
     }
-    console.log(isAuth);
   }, [isAuth, navigate]);
 
   const handleGetLogin = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,15 +66,22 @@ const Autification: React.FC<IAutificationProps> = () => {
       }
     } catch (error) {
       console.error("Ошибка аутентификации:", error);
-
-      setUsernameWrong(true);
+     
       setPasswordWrong(true);
     }
   };
 
   const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-    setUsernameWrong(false);
+   const loginRegex = /^[[\w-]+$/i;
+   const phoneRegex = /^[\d\+][\d\(\)\ -]{4,14}\d$/;
+     setUsername(e.target.value);
+    if (loginRegex.test(username)) {
+      setUsernameWrong(false);
+    } else if (phoneRegex.test(username)) {
+      setUsernameWrong(false);
+    } else {
+      setUsernameWrong(true);
+    }
   };
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
