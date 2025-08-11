@@ -10,6 +10,12 @@ interface ITarifsProps {
 }
 
 const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
+  const tarifs = {
+    first: "beginner",
+    second: "pro",
+    third: "business",
+  };
+
   return (
     <div className={style.cards}>
       <TarifCard
@@ -19,7 +25,7 @@ const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
         price="799"
         oldprice="1200"
         buttonname={
-          isAuth && tarif === "beginner"
+          isAuth && tarif === tarifs.first
             ? "Перейти в личный кабинет"
             : "Подробнее"
         }
@@ -28,13 +34,15 @@ const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
           "Безопасная сделка",
           "Поддержка 24/7",
         ]}
-        colorheader={isAuth && tarif === "beginner" ? "#FFB64F" : "#7CE3E1"}
-        colorbutton={isAuth && tarif === "beginner" ? "#D2D2D2" : "#5970FF"}
+        colorheader={isAuth && tarif === tarifs.first ? "#FFB64F" : "#7CE3E1"}
+        colorbutton={isAuth && tarif === tarifs.first ? "#D2D2D2" : "#5970FF"}
         colortitle="#000000"
         dopinfo="или 150 ₽/мес. при рассрочке на 24 мес."
-        beige={isAuth && tarif === "beginner" ? "Текущий тариф" : ""}
-        colorborder={isAuth && tarif === "beginner" ? "#FFB64F" : "#FFFFFF"}
-        colorbuttonname={isAuth && tarif === "beginner" ? "#000000" : "#FFFFFF"}
+        beige={isAuth && tarif === tarifs.first ? "Текущий тариф" : ""}
+        colorborder={isAuth && tarif === tarifs.first ? "#FFB64F" : "#FFFFFF"}
+        colorbuttonname={
+          isAuth && tarif === tarifs.first ? "#000000" : "#FFFFFF"
+        }
       />
       <TarifCard
         title="Pro"
@@ -43,20 +51,24 @@ const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
         price="1299"
         oldprice="2600"
         buttonname={
-          isAuth && tarif === "pro" ? "Перейти в личный кабинет" : "Подробнее"
+          isAuth && tarif === tarifs.second
+            ? "Перейти в личный кабинет"
+            : "Подробнее"
         }
         tariffitems={[
           "Все пункты тарифа Beginner",
           "Экспорт истории",
           "Рекомендации по приоритетам",
         ]}
-        colorheader={isAuth && tarif === "pro" ? "#FFB64F" : "#7CE3E1"}
-        colorbutton={isAuth && tarif === "pro" ? "#D2D2D2" : "#5970FF"}
+        colorheader={isAuth && tarif === tarifs.second ? "#FFB64F" : "#7CE3E1"}
+        colorbutton={isAuth && tarif === tarifs.second ? "#D2D2D2" : "#5970FF"}
         colortitle="#000000"
         dopinfo="или 279 ₽/мес. при рассрочке на 24 мес."
-        beige={isAuth && tarif === "pro" ? "Текущий тариф" : ""}
-        colorborder={isAuth && tarif === "pro" ? "#FFB64F" : "#FFFFFF"}
-        colorbuttonname={isAuth && tarif === "pro" ? "#000000" : "#FFFFFF"}
+        beige={isAuth && tarif === tarifs.second ? "Текущий тариф" : ""}
+        colorborder={isAuth && tarif === tarifs.second ? "#FFB64F" : "#FFFFFF"}
+        colorbuttonname={
+          isAuth && tarif === tarifs.second ? "#000000" : "#FFFFFF"
+        }
       />
       <TarifCard
         title="Business"
@@ -65,7 +77,7 @@ const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
         price="2379"
         oldprice="3700"
         buttonname={
-          isAuth && tarif === "business"
+          isAuth && tarif === tarifs.third
             ? "Перейти в личный кабинет"
             : "Подробнее"
         }
@@ -74,12 +86,14 @@ const TarifList: React.FC<ITarifsProps> = ({ isAuth, tarif }) => {
           "Безлимитное количество запросов",
           "Приоритетная поддержка",
         ]}
-        colorheader={isAuth && tarif === "business" ? "#FFB64F" : "#000000"}
-        colorbutton={isAuth && tarif === "business" ? "#D2D2D2" : "#5970FF"}
-        colortitle={isAuth && tarif === "business" ? "000000" : "#FFFFFF"}
-        beige={isAuth && tarif === "business" ? "Текущий тариф" : ""}
-        colorborder={isAuth && tarif === "business" ? "#FFB64F" : "#FFFFFF"}
-        colorbuttonname={isAuth && tarif === "business" ? "#000000" : "#FFFFFF"}
+        colorheader={isAuth && tarif === tarifs.third ? "#FFB64F" : "#000000"}
+        colorbutton={isAuth && tarif === tarifs.third ? "#D2D2D2" : "#5970FF"}
+        colortitle={isAuth && tarif === tarifs.third ? "000000" : "#FFFFFF"}
+        beige={isAuth && tarif === tarifs.third ? "Текущий тариф" : ""}
+        colorborder={isAuth && tarif === tarifs.third ? "#FFB64F" : "#FFFFFF"}
+        colorbuttonname={
+          isAuth && tarif === tarifs.third ? "#000000" : "#FFFFFF"
+        }
       />
     </div>
   );
