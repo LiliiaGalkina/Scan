@@ -16,6 +16,7 @@
 
 .searchtitle {
   margin-bottom: 2.5rem;
+  max-width: 81.7rem;
   font-size: 4rem;
   letter-spacing: 3%;
 }
@@ -80,6 +81,7 @@
 
 .checkboxitem {
   display: flex;
+  align-items: center;
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
@@ -151,4 +153,105 @@
   position: absolute;
   top: -20.06rem;
   right: 6.14rem;
+}
+
+
+@media (max-width: 1200px) {
+  .searchinfo {
+  margin-right: 1rem;
+  flex: 0 1 50%;
+}
+  .formblock {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .searchtitle {
+    font-size: 3.2rem;
+  }
+
+  .formfinishblock {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .dateblock {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .search {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+  }
+
+  .formdecor {
+    top: -12rem;
+    right: 0;
+  }
+
+  .searchmainimg {
+  margin-right: 0;
+}
+
+.imagedecor {
+  display: none;
+}
+}
+
+@media (max-width: 600px) {
+  .search {
+    padding: 2rem 0 2.47rem;
+  }
+
+  .searchtitle {
+    margin-bottom: 1.9rem;
+    font-size: 2.8rem;
+  }
+
+    .searthform {
+    padding: 3.2rem 2.6rem 3.7rem 1.4rem;
+  }
+
+  .formdecor {
+    max-width: 5.82rem;
+    top: -8rem;
+  }
+
+  .text {
+    margin-bottom: 2.1rem;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text {
+    max-width: 29.7rem;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .checkbox {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .checkboxtext {
+        font-size: 1.8rem;
+  }
+
+  .submitbutton {
+    width: 100%;
+    font-size: 2rem;
+  }
+
+  .searchmainimg {
+    width: 100%;
+  }
+
 }
