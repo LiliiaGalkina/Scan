@@ -4,7 +4,7 @@ import mainimg from "./img/mainimg.svg";
 import documentlist from "./img/Document.svg";
 import folders from "./img/Folders.svg"; 
 import { useState } from "react";
-import check from "./img/check.svg"
+import mark from "./img/mark.png";
 
 export default function Search() {
   const [inn, setInn] = useState("");
@@ -110,7 +110,7 @@ export default function Search() {
                         checked={maxFull}
                         onChange={() => setMaxFull(!maxFull)}
                         style={{
-                          backgroundImage: maxFull ? `url(${check})` : "none",
+                          backgroundImage: maxFull ? `url(${mark})` : "none",
                         }}
                       />
                       <p
@@ -130,7 +130,7 @@ export default function Search() {
                         onChange={() => setBuisnessContext(!buisnessContext)}
                         style={{
                           backgroundImage: buisnessContext
-                            ? `url(${check})`
+                            ? `url(${mark})`
                             : "none",
                         }}
                       />
@@ -147,6 +147,9 @@ export default function Search() {
                         className={style.checkbox}
                         checked={mainRole}
                         onChange={() => setMainRole(!mainRole)}
+                        style={{
+                          backgroundImage: mainRole ? `url(${mark})` : "none",
+                        }}
                       />
                       <p
                         className={style.checkboxtext}
@@ -161,6 +164,9 @@ export default function Search() {
                         className={style.checkbox}
                         checked={onlyRisk}
                         onChange={() => setOnlyRisk(!onlyRisk)}
+                        style={{
+                          backgroundImage: onlyRisk ? `url(${mark})` : "none",
+                        }}
                       />
                       <p
                         className={style.checkboxtext}
@@ -174,7 +180,12 @@ export default function Search() {
                         type="checkbox"
                         className={style.checkbox}
                         checked={technicalNews}
-                        onChange={() => setTechnicalNews}
+                        onChange={() => setTechnicalNews(!technicalNews)}
+                        style={{
+                          backgroundImage: technicalNews
+                            ? `url(${mark})`
+                            : "none",
+                        }}
                       />
                       <p
                         className={style.checkboxtext}
@@ -188,7 +199,10 @@ export default function Search() {
                         type="checkbox"
                         className={style.checkbox}
                         checked={previews}
-                        onChange={() => setPreviews}
+                        onChange={() => setPreviews(!previews)}
+                        style={{
+                          backgroundImage: previews ? `url(${mark})` : "none",
+                        }}
                       />
                       <p
                         className={style.checkboxtext}
@@ -202,7 +216,12 @@ export default function Search() {
                         type="checkbox"
                         className={style.checkbox}
                         checked={newsBulletin}
-                        onChange={() => setNewsBulletin}
+                        onChange={() => setNewsBulletin(!newsBulletin)}
+                        style={{
+                          backgroundImage: newsBulletin
+                            ? `url(${mark})`
+                            : "none",
+                        }}
                       />
                       <p
                         className={style.checkboxtext}
@@ -243,8 +262,15 @@ export default function Search() {
                     <button
                       type="submit"
                       className={`${allstyles.button} ${style.submitbutton}`}
-                      disabled={!inn || !countDocs || !startDate || !finishtDate}
-                      style={{opacity: !inn || !countDocs || !startDate || !finishtDate ? 0.5 : 1}}
+                      disabled={
+                        !inn || !countDocs || !startDate || !finishtDate
+                      }
+                      style={{
+                        opacity:
+                          !inn || !countDocs || !startDate || !finishtDate
+                            ? 0.5
+                            : 1,
+                      }}
                     >
                       Поиск
                     </button>
