@@ -30,9 +30,7 @@ export default function Search() {
 
   const validateInn = (inn: string): boolean => {
     const errorObj: Error = { code: 0, message: "" };
-
     let result = false;
-
     inn = String(inn);
 
     if (!inn.length) {
@@ -41,7 +39,7 @@ export default function Search() {
     } else if (!/^\d+$/.test(inn)) {
       errorObj.code = 2;
       errorObj.message = "ИНН может состоять только из цифр";
-    } else if ([10, 12].indexOf(inn.length) === -1) {
+    } else if ([10].indexOf(inn.length) === -1) {
       errorObj.code = 3;
       errorObj.message = "ИНН должен состоять из 10 цифр";
     } else {
@@ -61,7 +59,6 @@ export default function Search() {
       if (!isNaN(lastDigit) && n10 === lastDigit) {
         result = true;
       }
-
       if (!result) {
         errorObj.code = 4;
         errorObj.message = "Введите корректные данные";
@@ -131,7 +128,9 @@ export default function Search() {
                     name="inn"
                     id="inn"
                     value={inn}
-                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInn(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setInn(e.target.value)
+                    }
                     className={`${style.input} ${style.inputinfo}`}
                     onBlur={() => validateInn(inn)}
                     placeholder="10 цифр"
@@ -151,7 +150,9 @@ export default function Search() {
                     name="ton"
                     id="ton"
                     value={ton}
-                    onChange={(e:React.ChangeEvent<HTMLSelectElement>) => setTon(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                      setTon(e.target.value)
+                    }
                     className={`${style.selectinput} ${style.inputinfo}`}
                   >
                     <option>любая</option>
@@ -166,7 +167,9 @@ export default function Search() {
                     name="countdoc"
                     id="countdoc"
                     value={countDocs}
-                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCountDocs(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setCountDocs(e.target.value)
+                    }
                     className={`${style.input} ${style.inputinfo}`}
                     placeholder="От 1 до 1000"
                     required
