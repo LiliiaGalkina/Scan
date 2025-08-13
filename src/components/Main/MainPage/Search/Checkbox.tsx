@@ -1,24 +1,33 @@
 import style from "./search.module.scss";
+import mark from "./img/mark.png";
 
-const Checkbox = () => {
+interface CheckboxProps {
+  checkboxValue: boolean;
+  setCheckboxValue: (value: boolean) => void;
+  checkboxText: string;
+}
+
+const Checkbox: React.FC<CheckboxProps> = ({checkboxValue, setCheckboxValue, checkboxText}) => {
     return (
       <div className={style.checkboxitem}>
         <input
           type="checkbox"
           className={style.checkbox}
-          checked={technicalNews}
-          onChange={() => setTechnicalNews(!technicalNews)}
+          checked={checkboxValue}
+          onChange={() => setCheckboxValue(!checkboxValue)}
           style={{
-            backgroundImage: technicalNews ? `url(${mark})` : "none",
+            backgroundImage: checkboxValue ? `url(${mark})` : "none",
           }}
         />
         <p
           className={style.checkboxtext}
-          style={{ opacity: technicalNews ? 1 : 0.4 }}
+          style={{ opacity: checkboxValue ? 1 : 0.4 }}
         >
-          Включать технические новости рынков
+          {checkboxText}
         </p>
       </div>
     );
     
 }
+
+export default Checkbox;

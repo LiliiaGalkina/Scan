@@ -61,27 +61,41 @@
   font-size: 1.8rem;
 }
 
-.input {
+.input,
+.selectinput {
   height: 4.3rem;
   padding: 0 2.2rem;
   border: 0.1rem solid #c7c7c7;
+  border-radius: 0.5rem;
   font-size: 1.4rem;
+
   &::placeholder {
     text-align: center;
     color: #949494;
   }
 }
 
+.selectinput {
+  appearance: none;
+  background-image: url("./img/selectarrow.png");
+  background-repeat: no-repeat;
+  background-position: right 1.56rem top 50%, 0 0; 
+}
+
 .inputinfo {
   width: 24.2rem;
+
   &:not(:last-child) {
     margin-bottom: 3rem;
   }
 }
 
+
+
 .checkboxitem {
   display: flex;
   align-items: center;
+
   &:not(:last-child) {
     margin-bottom: 1.5rem;
   }
@@ -112,10 +126,48 @@
 }
 
 .dateinput {
+  position: relative;
   width: 17.6rem;
+  color: #ffffff;
+  appearance: none;
+  background-image: url("./img/selectarrow.png");
+  background-repeat: no-repeat;
+  background-position: right 1.56rem top 50%, 0 0; 
+
+
   &:first-child {
     margin-right: 2rem;
   }
+    &::placeholder {
+    text-align: center;
+  }
+
+  &::-webkit-calendar-picker-indicator,
+  &::-webkit-inner-spin-button {
+  opacity: 0;
+
+}
+
+  &::before {
+    position: absolute;
+     color: #949494;
+	content: attr(placeholder);
+  }
+
+  &:focus,
+  &:valid {
+    color: #000000;
+
+    &::before {
+      content: "" !important;
+    }
+  }
+}
+
+.error {
+  margin-top: -1rem;
+  font-size: 1.4em;
+  color: #ff0000;
 }
 
 .submitbutton {
