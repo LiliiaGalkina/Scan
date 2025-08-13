@@ -72,18 +72,6 @@ export default function Search() {
     return result;
   };
 
-  const handleChangeInn = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInn(e.target.value);
-  };
-
-  const handleChangeTon = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTon(e.target.value);
-  };
-
-  const handleChangeCount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCountDocs(e.target.value);
-  };
-
   const handleChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const now = new Date();
     const start = new Date(e.target.value);
@@ -143,7 +131,7 @@ export default function Search() {
                     name="inn"
                     id="inn"
                     value={inn}
-                    onChange={handleChangeInn}
+                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInn(e.target.value)}
                     className={`${style.input} ${style.inputinfo}`}
                     onBlur={() => validateInn(inn)}
                     placeholder="10 цифр"
@@ -163,7 +151,7 @@ export default function Search() {
                     name="ton"
                     id="ton"
                     value={ton}
-                    onChange={handleChangeTon}
+                    onChange={(e:React.ChangeEvent<HTMLSelectElement>) => setTon(e.target.value)}
                     className={`${style.selectinput} ${style.inputinfo}`}
                   >
                     <option>любая</option>
@@ -178,7 +166,7 @@ export default function Search() {
                     name="countdoc"
                     id="countdoc"
                     value={countDocs}
-                    onChange={handleChangeCount}
+                    onChange={(e:React.ChangeEvent<HTMLInputElement>) => setCountDocs(e.target.value)}
                     className={`${style.input} ${style.inputinfo}`}
                     placeholder="От 1 до 1000"
                     required
