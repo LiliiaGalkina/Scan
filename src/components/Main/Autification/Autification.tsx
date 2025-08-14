@@ -19,17 +19,54 @@ interface IAuthRes {
   expire: string;
 }
 
+interface Response {
+  eventFiltersInfo: {
+    usedCompanyCount: number;
+    companyLimit: number;
+  };
+}
+
 const Autification: React.FC<IAutificationProps> = () => {
-  const { isAuth, setIsAuth, setUserName, setTarif } = useAuth();
+  const { isAuth, setIsAuth, setUserName, setTarif, setCompanyCount, setCompanyLimit, setIsGetting } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWrong, setUsernameWrong] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
+   
+
+    const getCompanyInfo = async () => {
+      setIsGetting(true);
+      const url = "https://gateway.scan-interfax.ru/api/v1/account/info";
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data: Response = await response.json();
+        setCompanyCount(data.eventFiltersInfo.usedCompanyCount);
+        setCompanyLimit(data.eventFiltersInfo.companyLimit);
+        setIsGetting(false);
+      } catch (error) {
+        console.error("Ошибка при получении информации о компаниях:", error);
+      } finally {
+        setIsGetting(false);
+      }
+    };
 
   const navigate = useNavigate();
 
   useEffect(() => {
 	  if (isAuth) {
+      getCompanyInfo();
 		setTarif("beginner");
       navigate("/");
     }

@@ -6,31 +6,17 @@ import user from "./img/user.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import loader from "./img/loader.png";
 
 interface IHeaderProps {
   isAuth: boolean;
   userName: string;
 }
 
-/*interface CompanyInfo {
-  CompanyCount: number;
-  companyLimit: number;
-}*/
-
-interface Response {
-  eventFiltersInfo: {
-    usedCompanyCount: number;
-    companyLimit: number;
-  };
-}
-
 const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
-  const { setIsAuth } = useAuth();
+  const { setIsAuth, isGetting, companyCount, companyLimit } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [logoImg, setLogoImg] = useState(logomain);
-  const [isGetting, setIsGetting] = useState(false);
-  const [companyCount, setCompanyCount] = useState(0);
-  const [companyLimit, setCompanyLimit] = useState(0);
 
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -70,40 +56,6 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
     localStorage.removeItem("tokenExpire");
     navigate("/");
   };
-
-  const getCompanyInfo = async () => {
-    setIsGetting(true);
-    const url = "https://gateway.scan-interfax.ru/api/v1/account/info";
-    try {
-      const response = await fetch(url, 
-        {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: Response = await response.json();
-      setCompanyCount(data.eventFiltersInfo.usedCompanyCount);
-      setCompanyLimit(data.eventFiltersInfo.companyLimit);
-    } catch (error) {
-      console.error("Ошибка при получении информации о компаниях:", error);
-    } finally {
-      setIsGetting(false);
-    }
-  };
-
-  useEffect(() => {
-    getCompanyInfo();
-    const intervalId = setInterval(getCompanyInfo, 50000);
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <header className={style.header}>
@@ -180,15 +132,29 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
             {isAuth && (
               <>
                 <div className={style.info}>
-                  <div className={style.companies}>
-                    <p>Использовано компаний </p>
-                    <span>{companyCount}</span>
-                  </div>
-                  <div className={style.limit}>
-                    <p>Лимит по компаниям </p>
-                    <span>{companyLimit}</span>
-                  </div>
+                  {isGetting && (
+                    <div className={style.loader}>
+                      <img
+                        src={loader}
+                        className={style.loaderimg}
+                        alt="loader"
+                      />
+                    </div>
+                  )}
+                  {!isGetting && (
+                    <>
+                      <div className={style.companies}>
+                        <p>Использовано компаний </p>
+                        <span>{companyCount}</span>
+                      </div>
+                      <div className={style.limit}>
+                        <p>Лимит по компаниям </p>
+                        <span>{companyLimit}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
+
                 <div className={style.userinfo}>
                   <div className={style.usertext}>
                     <div className={style.username}>{userName} </div>
