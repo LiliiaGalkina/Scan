@@ -27,6 +27,7 @@ export default function Search() {
   const [dateStartError, setDateStartError] = useState("");
   const [dateFinishError, setDateFinishError] = useState("");
   const [innError, setInnError] = useState("");
+  const [countError, setCountError] = useState("");
 
   const validateInn = (inn: string): boolean => {
     const errorObj: Error = { code: 0, message: "" };
@@ -67,6 +68,16 @@ export default function Search() {
 
     setInnError(errorObj.message);
     return result;
+  };
+
+  const validateCount = (count: string | number) => {
+    count = Number(count);
+
+    if (count < 1 || count > 1000) {
+      setCountError("Введите число > 0 и < 1000");
+    } else {
+      setCountError("");
+    }
   };
 
   const handleChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,29 +131,34 @@ export default function Search() {
               </div>
               <div className={style.formblock}>
                 <div className={style.inputs}>
-                  <label htmlFor="inn" className={style.label}>
-                    ИНН компании<sup>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    name="inn"
-                    id="inn"
-                    value={inn}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setInn(e.target.value)
-                    }
-                    className={`${style.input} ${style.inputinfo}`}
-                    onBlur={() => validateInn(inn)}
-                    placeholder="10 цифр"
-                    required
-                    style={{
-                      border: innError
-                        ? "0.1rem solid #ff0000"
-                        : "0.1rem solid #c7c7c7",
-                      color: innError ? "#ff0000" : "#000000",
-                    }}
-                  />
-                  {innError && <p className={style.error}>{innError}</p>}
+                  <div className={style.inputwrapper}>
+                    <label htmlFor="inn" className={style.label}>
+                      ИНН компании
+                      <sup style={{ color: innError ? "#ff0000" : "#000000" }}>
+                        *
+                      </sup>
+                    </label>
+                    <input
+                      type="text"
+                      name="inn"
+                      id="inn"
+                      value={inn}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setInn(e.target.value)
+                      }
+                      className={`${style.input} ${style.inputinfo}`}
+                      onBlur={() => validateInn(inn)}
+                      placeholder="10 цифр"
+                      required
+                      style={{
+                        border: innError
+                          ? "0.1rem solid #ff0000"
+                          : "0.1rem solid #c7c7c7",
+                        color: innError ? "#ff0000" : "#000000",
+                      }}
+                    />
+                    <p className={style.error}>{innError}</p>
+                  </div>
                   <label htmlFor="ton" className={style.label}>
                     Тональность
                   </label>
@@ -159,21 +175,25 @@ export default function Search() {
                     <option>позитивная</option>
                     <option>негативная</option>
                   </select>
-                  <label htmlFor="countdoc" className={style.label}>
-                    Количество документов в выдаче<sup>*</sup>
-                  </label>
-                  <input
-                    type="text"
-                    name="countdoc"
-                    id="countdoc"
-                    value={countDocs}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setCountDocs(e.target.value)
-                    }
-                    className={`${style.input} ${style.inputinfo}`}
-                    placeholder="От 1 до 1000"
-                    required
-                  />
+                  <div className={style.inputwrapper}>
+                    <label htmlFor="countdoc" className={style.label}>
+                      Количество документов в выдаче<sup style={{color: countError ? "#ff0000" : "#000000"}}>*</sup>
+                    </label>
+                    <input
+                      type="text"
+                      name="countdoc"
+                      id="countdoc"
+                      value={countDocs}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCountDocs(e.target.value)
+                      }
+                      onBlur={() => validateCount(countDocs)}
+                      className={`${style.input} ${style.inputinfo}`}
+                      placeholder="От 1 до 1000"
+                      required
+                    />
+                    <p className={style.error}>{countError}</p>
+                  </div>
                 </div>
                 <div className={style.checkboxes}>
                   <Checkbox
@@ -214,44 +234,54 @@ export default function Search() {
                 </div>
               </div>
               <p className={style.label}>
-                Диапазон поиска<sup>*</sup>
+                Диапазон поиска
+                <sup
+                  style={{
+                    color:
+                      dateFinishError || dateStartError ? "#ff0000" : "#000000",
+                  }}
+                >
+                  *
+                </sup>
               </p>
               <div className={style.formfinishblock}>
-                <div className={style.dateblock}>
-                  <input
-                    type="date"
-                    name="start"
-                    id="start"
-                    value={startDate}
-                    onChange={handleChangeStartDate}
-                    className={`${style.input} ${style.dateinput}`}
-                    placeholder="Дата начала"
-                    required
-                    style={{
-                      border:
-                        dateStartError !== ""
-                          ? "0.1rem solid #ff0000"
-                          : "0.1rem solid #c7c7c7",
-                    }}
-                  />
-                  <p className={style.error}>{dateStartError}</p>
-                  <input
-                    type="date"
-                    name="finish"
-                    id="finish"
-                    value={finishDate}
-                    onChange={handleChangeFinishDate}
-                    className={`${style.input} ${style.dateinput}`}
-                    placeholder="Дата конца"
-                    required
-                    style={{
-                      border:
-                        dateFinishError !== ""
-                          ? "0.1rem solid #ff0000"
-                          : "0.1rem solid #c7c7c7",
-                    }}
-                  />
-                  <p className={style.error}>{dateFinishError}</p>
+                <div className={style.datewrapper}>
+                  <div className={style.dateblock}>
+                    <input
+                      type="date"
+                      name="start"
+                      id="start"
+                      value={startDate}
+                      onChange={handleChangeStartDate}
+                      className={`${style.input} ${style.dateinput}`}
+                      placeholder="Дата начала"
+                      required
+                      style={{
+                        border:
+                          dateStartError !== ""
+                            ? "0.1rem solid #ff0000"
+                            : "0.1rem solid #c7c7c7",
+                      }}
+                    />
+                    <input
+                      type="date"
+                      name="finish"
+                      id="finish"
+                      value={finishDate}
+                      onChange={handleChangeFinishDate}
+                      className={`${style.input} ${style.dateinput}`}
+                      placeholder="Дата конца"
+                      required
+                      style={{
+                        border:
+                          dateFinishError !== ""
+                            ? "0.1rem solid #ff0000"
+                            : "0.1rem solid #c7c7c7",
+                      }}
+                    />
+                  </div>
+                  <p className={style.errordate}>{dateStartError}</p>
+                  <p className={style.errordate}>{dateFinishError}</p>
                 </div>
                 <div className={style.submitblock}>
                   <button
@@ -262,6 +292,8 @@ export default function Search() {
                       !countDocs ||
                       !startDate ||
                       !finishDate ||
+                      innError !== "" ||
+                      countError !== "" ||
                       dateFinishError !== "" ||
                       dateStartError !== ""
                     }
@@ -271,8 +303,10 @@ export default function Search() {
                         !countDocs ||
                         !startDate ||
                         !finishDate ||
-                        dateFinishError !== "" ||
-                        dateStartError !== ""
+                        innError ||
+                        countError ||
+                        dateFinishError ||
+                        dateStartError
                           ? 0.5
                           : 1,
                     }}
