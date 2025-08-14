@@ -16,7 +16,7 @@ export default function Search() {
   const [ton, setTon] = useState("");
   const [countDocs, setCountDocs] = useState("");
   const [startDate, setStartDate] = useState("");
-  const [finishDate, setFinishDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [maxFull, setMaxFull] = useState(false);
   const [buisnessContext, setBuisnessContext] = useState(false);
   const [mainRole, setMainRole] = useState(false);
@@ -25,7 +25,7 @@ export default function Search() {
   const [previews, setPreviews] = useState(false);
   const [newsBulletin, setNewsBulletin] = useState(false);
   const [dateStartError, setDateStartError] = useState("");
-  const [dateFinishError, setDateFinishError] = useState("");
+  const [dateEndError, setDateEndError] = useState("");
   const [innError, setInnError] = useState("");
   const [countError, setCountError] = useState("");
 
@@ -88,7 +88,7 @@ export default function Search() {
       setStartDate(e.target.value);
       setDateStartError("Дата не может быть позже текущей");
       console.log(dateStartError);
-    } else if (start > new Date(finishDate)) {
+    } else if (start > new Date(endDate)) {
       setStartDate(e.target.value);
       setDateStartError("Дата начала периода не может быть больше даты конца");
     } else {
@@ -102,14 +102,14 @@ export default function Search() {
     const finish = new Date(e.target.value);
 
     if (finish > now) {
-      setFinishDate(e.target.value);
-      setDateFinishError("Дата не может быть позже текущей");
+      setEndDate(e.target.value);
+      setDateEndError("Дата не может быть позже текущей");
     } else if (finish < new Date(startDate)) {
-      setFinishDate(e.target.value);
-      setDateFinishError("Дата конца периода не может быть меньше даты начала");
+      setEndDate(e.target.value);
+      setDateEndError("Дата конца периода не может быть меньше даты начала");
     } else {
-      setFinishDate(e.target.value);
-      setDateFinishError("");
+      setEndDate(e.target.value);
+      setDateEndError("");
     }
   };
 
@@ -238,7 +238,7 @@ export default function Search() {
                 <sup
                   style={{
                     color:
-                      dateFinishError || dateStartError ? "#ff0000" : "#000000",
+                      dateEndError || dateStartError ? "#ff0000" : "#000000",
                   }}
                 >
                   *
@@ -267,21 +267,21 @@ export default function Search() {
                       type="date"
                       name="finish"
                       id="finish"
-                      value={finishDate}
+                      value={endDate}
                       onChange={handleChangeFinishDate}
                       className={`${style.input} ${style.dateinput}`}
                       placeholder="Дата конца"
                       required
                       style={{
                         border:
-                          dateFinishError !== ""
+                          dateEndError !== ""
                             ? "0.1rem solid #ff0000"
                             : "0.1rem solid #c7c7c7",
                       }}
                     />
                   </div>
                   <p className={style.errordate}>{dateStartError}</p>
-                  <p className={style.errordate}>{dateFinishError}</p>
+                  <p className={style.errordate}>{dateEndError}</p>
                 </div>
                 <div className={style.submitblock}>
                   <button
@@ -291,10 +291,10 @@ export default function Search() {
                       !inn ||
                       !countDocs ||
                       !startDate ||
-                      !finishDate ||
+                      !endDate ||
                       innError !== "" ||
                       countError !== "" ||
-                      dateFinishError !== "" ||
+                      dateEndError !== "" ||
                       dateStartError !== ""
                     }
                     style={{
@@ -302,10 +302,10 @@ export default function Search() {
                         !inn ||
                         !countDocs ||
                         !startDate ||
-                        !finishDate ||
+                        !endDate ||
                         innError ||
                         countError ||
-                        dateFinishError ||
+                        dateEndError ||
                         dateStartError
                           ? 0.5
                           : 1,
