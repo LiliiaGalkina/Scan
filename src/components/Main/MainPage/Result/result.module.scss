@@ -1,0 +1,135 @@
+.result {
+    padding: 2.5rem 0 10.9rem;
+}
+
+.resultmainblock {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resulttitle {
+    margin-top: 4.4rem;
+    margin-bottom: 3.6rem;
+    max-width: 48rem;
+    font-size: 4rem;
+    letter-spacing: 5%;
+}
+
+.resulttext {
+    max-width: 44.7rem;
+    font-size: 2rem;
+    letter-spacing: 1%;
+}
+
+.resultimage {
+    max-width: 55.26rem;
+    img {
+        width: 100%;
+    }
+}
+
+.loaderblock {
+    padding: 5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resultloader {
+    margin-bottom: 2rem;
+    width: 7rem;
+    img {
+        width: 100%;
+        animation: 3s linear 0s normal none infinite running rot;
+    }
+}
+
+.resultloadertext {
+    font-size: 2rem;
+    animation: 3s linear 0s normal none infinite running text;
+}
+
+.resulterror {
+    padding: 5rem 0;
+    font-size: 3rem;
+    color: #ff0000;
+}
+
+@keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rot {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes text {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+   opacity: 0.7;
+  }
+}
+
+
+
+@media (max-width: 1024px) {
+    .resulttitle {
+        margin-top: 2rem;
+        font-size: 3.2rem;
+    }
+
+    .resulttext {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .resultmainblock {
+        flex-direction: column;
+        align-items: center;
+        gap: 2.1rem;
+    }
+
+    .resulttitle {
+        margin-top: 0;
+        max-width: 100%;
+    }
+
+    .resulttext {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .result {
+        padding: 2rem 0 5.7rem;
+    }
+
+    .resulttitle {
+        margin-bottom: 2.1rem;
+        max-width: 34rem;
+        font-size: 2.8rem;
+    }
+
+    .resultimage {
+        max-width: 35rem;
+    }
+}

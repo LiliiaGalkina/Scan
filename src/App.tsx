@@ -9,7 +9,7 @@ import "./components/fonts/ferry.otf";
 import MainPage from "./components/Main/MainPage/MainPage";
 import Autification from "./components/Main/Autification/Autification";
 import Search from "./components/Main/MainPage/Search/Search";
-import Result from "./components/Main/Result";
+import Result from "./components/Main/MainPage/Result/Result";
 import { useAuth } from "./Context/AuthContext";
 import { useEffect} from "react";
 

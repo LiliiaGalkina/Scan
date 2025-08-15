@@ -123,7 +123,7 @@ export default function Search() {
     } else {
       setIsFormValid(false);
     }
-  })
+  },[inn, countDocs, startDate, endDate])
 
   const handleSubmitForm = () => {
     const tonSeearch = ton === "любая" ? "any" : ton === "позитивная" ? "positive" : "negative";
