@@ -3,8 +3,9 @@ import allstyles from "../../allstyle.module.scss";
 import mainimg from "./img/mainimg.svg";
 import documentlist from "./img/Document.svg";
 import folders from "./img/Folders.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
+import { useNavigate } from "react-router-dom";
 
 interface Error {
   code: number;
@@ -28,6 +29,9 @@ export default function Search() {
   const [dateEndError, setDateEndError] = useState("");
   const [innError, setInnError] = useState("");
   const [countError, setCountError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const navigate = useNavigate();
 
   const validateInn = (inn: string): boolean => {
     const errorObj: Error = { code: 0, message: "" };
@@ -112,6 +116,56 @@ export default function Search() {
       setDateEndError("");
     }
   };
+
+  useEffect(() => {
+    if(inn && countDocs && startDate && endDate && !innError && !countError && !dateEndError && !dateStartError){
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  })
+
+  const handleSubmitForm = () => {
+    const tonSeearch = ton === "любая" ? "any" : ton === "позитивная" ? "positive" : "negative";
+    if (isFormValid) {
+      const searchParams = {
+        issueDateInterval: {
+          startDate: `${startDate}T00:00:00+03:00`,
+          endDate: `${endDate}T23:59:59+03:00`,
+        },
+        searchContext: {
+          targetSearchEntitiesContext: {
+            targetSearchEntities: [
+              {
+                type: "company",
+                inn: inn,
+                maxFullness: maxFull,
+              },
+            ],
+            onlyMainRole: mainRole,
+            tonality: tonSeearch,
+            onlyWithRiskFactors: onlyRisk,
+          },
+        },
+        attributeFilters: {
+          excludeTechNews: technicalNews,
+          excludeAnnouncements: previews,
+          excludeDigests: newsBulletin,
+        },
+        similarMode: "duplicates",
+        limit: Number(countDocs),
+        sortType: "sourceInfluence",
+        sortDirectionType: "desc",
+        intervalType: "month",
+        histogramTypes: ["totalDocuments", "riskFactors"],
+      };
+
+      console.log("Отправка запроса на сервер:", searchParams);
+      navigate("/result", { state: { searchParams: searchParams } });
+    } else {
+      console.log("Форма не валидна, введите корректные данные.");
+    }
+  }
 
   return (
     <main className={style.main}>
@@ -287,29 +341,9 @@ export default function Search() {
                   <button
                     type="submit"
                     className={`${allstyles.button} ${style.submitbutton}`}
-                    disabled={
-                      !inn ||
-                      !countDocs ||
-                      !startDate ||
-                      !endDate ||
-                      innError !== "" ||
-                      countError !== "" ||
-                      dateEndError !== "" ||
-                      dateStartError !== ""
-                    }
-                    style={{
-                      opacity:
-                        !inn ||
-                        !countDocs ||
-                        !startDate ||
-                        !endDate ||
-                        innError ||
-                        countError ||
-                        dateEndError ||
-                        dateStartError
-                          ? 0.5
-                          : 1,
-                    }}
+                    disabled={!isFormValid}
+                    style={{opacity: !isFormValid ? 0.5 : 1}}
+                    onClick={handleSubmitForm}
                   >
                     Поиск
                   </button>
