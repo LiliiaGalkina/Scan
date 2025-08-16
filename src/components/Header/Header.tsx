@@ -13,10 +13,54 @@ interface IHeaderProps {
   userName: string;
 }
 
+interface Response {
+  eventFiltersInfo: {
+    usedCompanyCount: number;
+    companyLimit: number;
+  };
+}
+
 const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
-  const { setIsAuth, isGetting, companyCount, companyLimit } = useAuth();
+  const {
+    setIsAuth,
+    isGetting,
+    companyCount,
+    companyLimit,
+    setCompanyCount,
+    setCompanyLimit,
+    setIsGetting,
+  } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [logoImg, setLogoImg] = useState(logomain);
+	const [logoImg, setLogoImg] = useState(logomain);
+	
+	 const getCompanyInfo = async () => {
+     setIsGetting(true);
+     const url = "https://gateway.scan-interfax.ru/api/v1/account/info";
+     try {
+       const response = await fetch(url, {
+         method: "GET",
+         headers: {
+           "Content-Type": "application/json",
+           Accept: "application/json",
+           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+         },
+       });
+
+       if (!response.ok) {
+         throw new Error(`HTTP error! status: ${response.status}`);
+       }
+
+       const data: Response = await response.json();
+       setCompanyCount(data.eventFiltersInfo.usedCompanyCount);
+       setCompanyLimit(data.eventFiltersInfo.companyLimit);
+       setIsGetting(false);
+     } catch (error) {
+       console.error("Ошибка при получении информации о компаниях:", error);
+     } finally {
+       setIsGetting(false);
+     }
+   };
+
 
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -44,10 +88,17 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("tokenExpire");
       }
-    }, 1000 * 60);
+	}, 1000 * 60);
+	  
 
     return () => clearInterval(interval);
   }, []);
+	
+	useEffect(() => {
+		if (isAuth) {
+			getCompanyInfo();
+		}
+	}, [isAuth]);
 
   const handleLogout = () => {
     setIsAuth(false);
