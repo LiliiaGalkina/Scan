@@ -4,6 +4,7 @@ import maimimgresult from "./img/mainimgresult.svg";
 import style from "./result.module.scss";
 import allstyles from "../../allstyle.module.scss";
 import loader from "../../../Header/img/loader.png";
+import Histograms from "./Histograms";
 
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,8 +13,8 @@ const Result = () => {
   const [isError, setIsError] = useState(false);
   const location = useLocation();
 
-  const getResult = async () => {
-    const searchParams = location.state?.searchParams;
+	const getResult = async () => {
+	  const searchParams = location.state.searchParams;
     if (!searchParams) {
       console.log("Параметры поиска отсутствуют");
       setIsLoading(false);
@@ -115,15 +116,28 @@ const Result = () => {
               />
             </div>
           </div>
-        { isLoading && 
-          <div className={style.loaderblock}>
-          <div className={style.resultloader}><img src={loader} alt="loader" /></div>
-          <div className={style.resultloadertext}>Загрузка данных...</div>
+          {isLoading && (
+            <div className={style.loaderblock}>
+              <div className={style.resultloader}>
+                <img src={loader} alt="loader" />
+              </div>
+              <div className={style.resultloadertext}>Загрузка данных...</div>
+            </div>
+          )}
+          {isError && (
+            <div className={style.resulterror}>
+              Ошибка загрузки данных. Попробуйте зайти позднее.
+            </div>
+          )}
+          <div className={style.histograms}>
+            <h3 className={`${allstyles.title} ${style.histogramstitle}`}>
+              Общая сводка
+            </h3>
+            <p className={style.histogramstext}>Найдено 4 221 вариантов</p>
+            <div className={style.histogramstable}>
+						  <Histograms histogramItems={histogramItems} />
+            </div>
           </div>
-        }
-       {isError &&
-           <div className={style.resulterror}>Ошибка загрузки данных. Попробуйте зайти позднее.</div>
-       }
         </div>
       </div>
     </main>

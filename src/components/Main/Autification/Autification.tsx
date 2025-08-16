@@ -19,20 +19,18 @@ interface IAuthRes {
   expire: string;
 }
 
-
 const Autification: React.FC<IAutificationProps> = () => {
-  const { isAuth, setIsAuth, setUserName, setTarif,  } = useAuth();
+  const { isAuth, setIsAuth, setUserName, setTarif, setCompanyCount, setCompanyLimit, setIsGetting } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWrong, setUsernameWrong] = useState(false);
   const [passwordWrong, setPasswordWrong] = useState(false);
    
-
-   
   const navigate = useNavigate();
 
   useEffect(() => {
 	  if (isAuth) {
+    
 		setTarif("beginner");
       navigate("/");
     }

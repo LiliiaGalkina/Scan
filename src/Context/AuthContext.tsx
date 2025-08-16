@@ -24,7 +24,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 	const [tarif, setTarif] = useState("")
   const [companyCount, setCompanyCount] = useState(0);
   const [companyLimit, setCompanyLimit] = useState(0);
-  const [isGetting, setIsGetting] = useState(false);
+	const [isGetting, setIsGetting] = useState(false);
+
 
 
    const checkAuth = () => {

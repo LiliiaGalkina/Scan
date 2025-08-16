@@ -125,8 +125,11 @@ export default function Search() {
     }
   },[inn, countDocs, startDate, endDate])
 
-  const handleSubmitForm = () => {
-    const tonSeearch = ton === "любая" ? "any" : ton === "позитивная" ? "positive" : "negative";
+	const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		
+    const tonSearch =
+      ton === "любая" ? "any" : ton === "позитивная" ? "positive" : "negative";
     if (isFormValid) {
       const searchParams = {
         issueDateInterval: {
@@ -143,7 +146,7 @@ export default function Search() {
               },
             ],
             onlyMainRole: mainRole,
-            tonality: tonSeearch,
+            tonality: tonSearch,
             onlyWithRiskFactors: onlyRisk,
           },
         },
@@ -159,13 +162,12 @@ export default function Search() {
         intervalType: "month",
         histogramTypes: ["totalDocuments", "riskFactors"],
       };
-
       console.log("Отправка запроса на сервер:", searchParams);
       navigate("/result", { state: { searchParams: searchParams } });
     } else {
       console.log("Форма не валидна, введите корректные данные.");
     }
-  }
+  };
 
   return (
     <main className={style.main}>
@@ -179,7 +181,7 @@ export default function Search() {
               Задайте параметры поиска. <br />
               Чем больше заполните, тем точнее поиск
             </div>
-            <form action="#" className={style.searthform}>
+            <form onSubmit={handleSubmitForm} className={style.searthform}>
               <div className={style.formdecor}>
                 <img src={documentlist} alt="зеленый лист бумаги" />
               </div>
@@ -231,7 +233,12 @@ export default function Search() {
                   </select>
                   <div className={style.inputwrapper}>
                     <label htmlFor="countdoc" className={style.label}>
-                      Количество документов в выдаче<sup style={{color: countError ? "#ff0000" : "#000000"}}>*</sup>
+                      Количество документов в выдаче
+                      <sup
+                        style={{ color: countError ? "#ff0000" : "#000000" }}
+                      >
+                        *
+                      </sup>
                     </label>
                     <input
                       type="text"
@@ -342,8 +349,7 @@ export default function Search() {
                     type="submit"
                     className={`${allstyles.button} ${style.submitbutton}`}
                     disabled={!isFormValid}
-                    style={{opacity: !isFormValid ? 0.5 : 1}}
-                    onClick={handleSubmitForm}
+                    style={{ opacity: !isFormValid ? 0.5 : 1 }}
                   >
                     Поиск
                   </button>

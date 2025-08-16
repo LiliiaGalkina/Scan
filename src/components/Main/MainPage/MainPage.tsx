@@ -20,7 +20,6 @@ const MainPage: React.FC<IMainProps> = ({ isAuth, tarif }) => {
     } else {
       navigate("/auth");
 	  }
-	  console.log(isAuth);
   };
 
   return (
