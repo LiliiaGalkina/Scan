@@ -2,28 +2,80 @@ import style from "./result.module.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import arrowleft from "./img/arrowleft.svg";
 import arrowright from "./img/arrowright.svg";
 import { useEffect, useState } from "react";
+
+const vremData = [
+  {
+    period: "10.09.2021",
+    total: 5,
+    risks: 0,
+  },
+  {
+    period: "13.09.2021",
+    total: 2,
+    risks: 0,
+  },
+  {
+    period: "17.09.2021",
+    total: 6,
+    risks: 0,
+  },
+  {
+    period: "20.09.2021",
+    total: 8,
+    risks: 2,
+  },
+  {
+    period: "12.10.2021",
+    total: 1,
+    risks: 0,
+  },
+  {
+    period: "15.10.2021",
+    total: 10,
+    risks: 2,
+  },
+  {
+    period: "16.10.2021",
+    total: 4,
+    risks: 0,
+  },
+  {
+    period: "17.10.2021",
+    total: 3,
+    risks: 0,
+  },
+  {
+    period: "18.10.2021",
+    total: 6,
+    risks: 1,
+  },
+  {
+    period: "19.10.2021",
+    total: 4,
+    risks: 0,
+  },
+];
 
 interface IHistogramsProps {
   histogramItems: any;
 }
 
 interface IHistogramsItem {
-	period: string;
-	total: number;
-	risks: number;
+  period: string;
+  total: number;
+  risks: number;
 }
 
 const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
   const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
 
-	useEffect(() => {
-		if (histogramItems) {
-    setDataItems(histogramItems);
-		  
-	  }
+  useEffect(() => {
+    if (histogramItems) {
+      //setDataItems(histogramItems);
+      setDataItems(vremData);
+    }
   });
 
   const SlickButtonFix = ({
@@ -36,7 +88,7 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
   const settings = {
     dots: false,
     infinite: false,
-    slidesToShow: 8,
+    slidesToShow: 7,
     slidesToScroll: 1,
     nextArrow: (
       <SlickButtonFix>
@@ -53,7 +105,7 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
       <SlickButtonFix>
         <div>
           <img
-            src={arrowleft}
+            src={arrowright}
             className={style.arrowleft}
             alt="стрелка влево"
           />
@@ -62,37 +114,57 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
     ),
     responsive: [
       {
-        breakpoint: 950,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 5,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
         },
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
         },
       },
     ],
   };
   return (
     <div className={style.histogramsblock}>
-      <div className={style.histogramsbody}>
+      
         <div className={style.histogramsheader}>
           <div className={style.histogramsheaderitem}>Период</div>
           <div className={style.histogramsheaderitem}>Всего</div>
           <div className={style.histogramsheaderitem}>Риски</div>
         </div>
-        <Slider {...settings}>
-          {dataItems.map((item, index) => (
-            <div key={index} className={style.slideritem}>
-				  <div className={style.slideritemceil}>{item.period}</div>
-				  <div className={style.slideritemceil}>{item.total}</div>
-				  <div className={style.slideritemceil}>{item.risks }</div>
-            </div>
-          ))}
-        </Slider>
-      </div>
+        <div className={style.histogramsslider}>
+          <Slider {...settings}>
+            {dataItems.map((item, index) => (
+              <div key={index} className={style.histogramsslideritem}>
+                <div className={style.histogramsslideritemceil}>
+                  {item.period}
+                </div>
+                <div className={style.histogramsslideritemceil}>
+                  {item.total}
+                </div>
+                <div className={style.histogramsslideritemceil}>
+                  {item.risks}
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+   
     </div>
   );
 };

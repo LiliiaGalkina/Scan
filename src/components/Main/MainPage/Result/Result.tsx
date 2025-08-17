@@ -6,9 +6,17 @@ import allstyles from "../../allstyle.module.scss";
 import loader from "../../../Header/img/loader.png";
 import Histograms from "./Histograms";
 
+
+
+interface IHistogramsItem {
+	period: string;
+	total: number;
+	risks: number;
+}
+
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [histogramItems, setHistogramItems] = useState(null);
+  const [histogramItems, setHistogramItems] = useState<IHistogramsItem[]>([]);
   const [documetsItems, setDocumentsItems] = useState(null);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
@@ -30,7 +38,8 @@ const Result = () => {
       const histogramRes = await fetch(histogramUrl, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+			"Content-Type": "application/json",
+			"Accept": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(searchParams),
@@ -50,6 +59,7 @@ const Result = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(searchParams),
@@ -70,6 +80,7 @@ const Result = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify({ ids: publicationIdsItems }),
@@ -82,6 +93,7 @@ const Result = () => {
 
       const documentsData = await documentsRes.json();
 
+		
       setHistogramItems(histogramData);
       setDocumentsItems(documentsData);
     } catch (e: any) {
