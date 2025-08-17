@@ -27,7 +27,8 @@ const Result = () => {
       console.log("Параметры поиска отсутствуют");
       setIsLoading(false);
       return;
-    }
+		}
+		
     setIsLoading(true);
     setIsError(false);
 
@@ -47,7 +48,7 @@ const Result = () => {
       });
 
       if (!histogramRes.ok) {
-        throw new Error("Ошибка получения данных с сервера");
+        throw new Error("Ошибка получения данных histograms с сервера");
       }
 
       const histogramData = await histogramRes.json();
@@ -67,7 +68,7 @@ const Result = () => {
       });
 
       if (!publicationIdRes.ok) {
-        throw new Error("Ошибка получения данных с сервера");
+        throw new Error("Ошибка получения данных objectsearch с сервера");
       }
 
       const publicationIdData = await publicationIdRes.json();
@@ -88,7 +89,7 @@ const Result = () => {
       });
 
       if (!documentsRes.ok) {
-        throw new Error("Ошибка получения данных с сервера");
+        throw new Error("Ошибка получения данных documents с сервера");
       }
 
       const documentsData = await documentsRes.json();
