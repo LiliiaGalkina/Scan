@@ -7,12 +7,10 @@ import loader from "../../../Header/img/loader.png";
 import Histograms from "./Histograms";
 import DocumentItem from "./DocumentItem";
 
-
-
 interface IHistogramsItem {
-	period: string;
-	total: number;
-	risks: number;
+  period: string;
+  total: number;
+  risks: number;
 }
 
 const Result = () => {
@@ -22,14 +20,14 @@ const Result = () => {
   const [isError, setIsError] = useState(false);
   const location = useLocation();
 
-	const getResult = async () => {
-	  const searchParams = location.state.searchParams;
+  const getResult = async () => {
+    const searchParams = location.state.searchParams;
     if (!searchParams) {
       console.log("Параметры поиска отсутствуют");
       setIsLoading(false);
       return;
-		}
-		
+    }
+
     setIsLoading(true);
     setIsError(false);
 
@@ -40,20 +38,20 @@ const Result = () => {
       const histogramRes = await fetch(histogramUrl, {
         method: "POST",
         headers: {
-			"Content-Type": "application/json",
-			"Accept": "application/json",
+          "Content-Type": "application/json",
+          Accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(searchParams),
         credentials: "omit",
       });
 
-     if (!histogramRes.ok) {
+      if (!histogramRes.ok) {
         throw new Error("Ошибка получения данных histograms с сервера");
       }
 
       const histogramData = await histogramRes.json();
-       setHistogramItems(histogramData);
+      setHistogramItems(histogramData);
 
       console.log(histogramData);
 
@@ -102,7 +100,6 @@ const Result = () => {
       setDocumentsItems(documentsData);
 
       console.log(documentsData);
-
     } catch (e: any) {
       console.log("Ошибка выполнения запроса данных с сервера", e.message);
       setIsError(true);
@@ -167,6 +164,11 @@ const Result = () => {
               <DocumentItem />
               <DocumentItem />
             </div>
+            <button
+              className={`${allstyles.button} ${style.buttonadddocuments}`}
+            >
+              Показать больше
+            </button>
           </section>
         </div>
       </div>
