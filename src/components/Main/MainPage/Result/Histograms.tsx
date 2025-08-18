@@ -139,9 +139,38 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
       },
     ],
   };
+
+  const settingsmobile = {
+    dots: false,
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: (
+      <SlickButtonFix>
+        <div>
+          <img
+            src={arrowright}
+            className={style.mobilearrowright}
+            alt="стрелка вправо"
+          />
+        </div>
+      </SlickButtonFix>
+    ),
+    prevArrow: (
+      <SlickButtonFix>
+        <div>
+          <img
+            src={arrowright}
+            className={style.mobilearrowleft}
+            alt="стрелка влево"
+          />
+        </div>
+      </SlickButtonFix>
+    ),
+  };
   return (
-    <div className={style.histogramsblock}>
-      
+    <>
+      <div className={style.histogramsblock}>
         <div className={style.histogramsheader}>
           <div className={style.histogramsheaderitem}>Период</div>
           <div className={style.histogramsheaderitem}>Всего</div>
@@ -164,8 +193,30 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
             ))}
           </Slider>
         </div>
-   
-    </div>
+      </div>
+      <div className={style.histogramsmobile}>
+        <div className={style.histogramsmobileslider}>
+          <Slider {...settingsmobile}>
+            {dataItems.map((item, index) => (
+              <div key={index} className={style.histogramsmobileitem}>
+                <div className={style.mobilecolumn}>
+                  <div className={style.mobilecolumbheader}>Период</div>
+                  <div className={style.mobilevalue}>{item.period}</div>
+                </div>
+                <div className={style.mobilecolumn}>
+                  <div className={style.mobilecolumbheader}>Всего</div>
+                  <div className={style.mobilevalue}>{item.total}</div>
+                </div>
+                <div className={style.mobilecolumn}>
+                  <div className={style.mobilecolumbheader}>Риски</div>
+                  <div className={style.mobilevalue}>{item.risks}</div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+    </>
   );
 };
 

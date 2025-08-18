@@ -139,6 +139,27 @@
   }
 }
 
+.histogramsmobile {
+    display: none;
+}
+
+/*documents*/
+
+.documents {
+  padding: 5.4rem 0 10.9rem;
+}
+
+.documentstitle {
+  margin-bottom: 5.8rem;
+  font-size: 3rem;
+}
+
+.documentsitems {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.8rem;
+}
+
 @keyframes rot {
   0% {
     transform: rotate(0deg);
@@ -206,6 +227,10 @@
   .histogramsslideritem {
     font-size: 1.6rem;
   }
+
+  .resulterror {
+    font-size: 2.6rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -221,5 +246,58 @@
 
   .resultimage {
     max-width: 35rem;
+  }
+
+  .histogramsblock {
+    display: none;
+  }
+
+  .histogramsmobile {
+    position: relative;
+    width: 100%;
+    display: block;
+  }
+
+  .histogramsmobileslider {
+    margin: 0 auto;
+    width: 92%;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem #cccccc;
+  }
+
+  .histogramsmobileitem {
+    width: 100%;
+    display: flex !important;
+    text-align: center;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .mobilecolumn {
+    max-width: 33.3%;
+    flex: 1;
+  }
+
+  .mobilecolumbheader {
+    padding: 2.3rem 1.5rem;
+    background-color: #029491;
+    color: #ffffff;
+    font-size: 1.8rem;
+  }
+
+  .mobilevalue {
+    padding: 1.8rem 1rem 2.8rem;
+    font-size: 1.8rem;
+  }
+
+  .mobilearrowleft {
+    position: absolute;
+    left: -1rem;
+    transform: rotate(180deg);
+  }
+
+  .mobilearrowright {
+    position: absolute;
+    right: -1rem;
   }
 }

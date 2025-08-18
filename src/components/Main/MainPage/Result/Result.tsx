@@ -5,6 +5,7 @@ import style from "./result.module.scss";
 import allstyles from "../../allstyle.module.scss";
 import loader from "../../../Header/img/loader.png";
 import Histograms from "./Histograms";
+import DocumentItem from "./DocumentItem";
 
 
 
@@ -47,11 +48,14 @@ const Result = () => {
         credentials: "omit",
       });
 
-      if (!histogramRes.ok) {
+     if (!histogramRes.ok) {
         throw new Error("Ошибка получения данных histograms с сервера");
       }
 
       const histogramData = await histogramRes.json();
+       setHistogramItems(histogramData);
+
+      console.log(histogramData);
 
       const publicationIdUrl =
         "https://gateway.scan-interfax.ru/api/v1/objectsearch";
@@ -76,6 +80,8 @@ const Result = () => {
         (item: any) => item.encodedId
       );
 
+      console.log(publicationIdsItems);
+
       const documentsUrl = "https://gateway.scan-interfax.ru/api/v1/documents";
       const documentsRes = await fetch(documentsUrl, {
         method: "POST",
@@ -93,10 +99,10 @@ const Result = () => {
       }
 
       const documentsData = await documentsRes.json();
-
-		
-      setHistogramItems(histogramData);
       setDocumentsItems(documentsData);
+
+      console.log(documentsData);
+
     } catch (e: any) {
       console.log("Ошибка выполнения запроса данных с сервера", e.message);
       setIsError(true);
@@ -142,15 +148,26 @@ const Result = () => {
               Ошибка загрузки данных. Попробуйте зайти позднее.
             </div>
           )}
-          <div className={style.histograms}>
+          <section className={style.histograms}>
             <h3 className={`${allstyles.title} ${style.histogramstitle}`}>
               Общая сводка
             </h3>
             <p className={style.histogramstext}>Найдено 4 221 вариантов</p>
             <div className={style.histogramstable}>
-						  <Histograms histogramItems={histogramItems} />
+              <Histograms histogramItems={histogramItems} />
             </div>
-          </div>
+          </section>
+          <section className={style.documents}>
+            <h2 className={`${allstyles.title} ${style.documentstitle}`}>
+              Список документов
+            </h2>
+            <div className={style.documentsitems}>
+              <DocumentItem />
+              <DocumentItem />
+              <DocumentItem />
+              <DocumentItem />
+            </div>
+          </section>
         </div>
       </div>
     </main>
