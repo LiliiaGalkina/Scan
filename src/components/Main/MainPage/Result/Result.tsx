@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import maimimgresult from "./img/mainimgresult.svg";
 import style from "./result.module.scss";
 import allstyles from "../../allstyle.module.scss";
-import loader from "../../../Header/img/loader.png";
+
 import Histograms from "./Histograms";
 import DocumentItem from "./DocumentItem";
+import { localHistogramsData } from "./localdata";
+
 
 interface IHistogramsItem {
   period: string;
@@ -15,12 +17,66 @@ interface IHistogramsItem {
 
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [histogramItems, setHistogramItems] = useState<IHistogramsItem[]>([]);
+  const [histogramsItems, setHistogramsItems] = useState<IHistogramsItem[]>([]);
   const [documetsItems, setDocumentsItems] = useState(null);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
 
+  
+
   const getResult = async () => {
+     const searchParams = location.state.searchParams;
+     if (!searchParams) {
+       console.log("Параметры поиска отсутствуют");
+       setIsLoading(false);
+       return;
+     }
+
+     setIsLoading(true);
+     setIsError(false);
+
+     // get histograms-------------------------------------------------
+      const histogramUrl =
+        "https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms";
+
+      try {
+         const histogramsRes = await fetch(histogramUrl, {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             Accept: "application/json",
+             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+           },
+           body: JSON.stringify(searchParams),
+           credentials: "omit",
+         });
+
+         if (!histogramsRes.ok) {
+           throw new Error("Ошибка получения данных histograms с сервера");
+         }
+
+         const histogramsData = await histogramsRes.json();
+         setHistogramsItems(histogramsData);
+      } catch (err) {
+         console.error("Ошибка при запросе данных с сервера:", err);
+         try {
+           setHistogramsItems(localHistogramsData);
+         } catch (err) {
+          console.error("Ошибка при загрузке локальных данных:", err);
+          setIsError(true);
+         }
+      } finally {
+        setIsLoading(false);
+      }
+
+      //get ids------------------------------
+  }
+  
+
+
+  //-----------------------------------------------------------------
+/*  const getResult = async () => {
+   
     const searchParams = location.state.searchParams;
     if (!searchParams) {
       console.log("Параметры поиска отсутствуют");
@@ -39,30 +95,29 @@ const Result = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(searchParams),
         credentials: "omit",
-      });
+      }); 
 
-      if (!histogramRes.ok) {
+     if (!histogramRes.ok) {
         throw new Error("Ошибка получения данных histograms с сервера");
       }
 
       const histogramData = await histogramRes.json();
+      console.log(histogramData);
       setHistogramItems(histogramData);
 
-      console.log(histogramData);
-
-      const publicationIdUrl =
+         const publicationIdUrl =
         "https://gateway.scan-interfax.ru/api/v1/objectsearch";
 
       const publicationIdRes = await fetch(publicationIdUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(searchParams),
@@ -85,7 +140,7 @@ const Result = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          "Accept": "application/json",
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify({ ids: publicationIdsItems }),
@@ -103,14 +158,19 @@ const Result = () => {
     } catch (e: any) {
       console.log("Ошибка выполнения запроса данных с сервера", e.message);
       setIsError(true);
+      try {
+
+      } catch (e) {
+
+      }
     } finally {
       setIsLoading(false);
     }
-  };
+  };*/
 
   useEffect(() => {
     getResult();
-  }, [histogramItems, documetsItems]);
+  }, [JSON.stringify(location.state?.searchParams)]);
 
   return (
     <main className={style.main}>
@@ -132,14 +192,7 @@ const Result = () => {
               />
             </div>
           </div>
-          {isLoading && (
-            <div className={style.loaderblock}>
-              <div className={style.resultloader}>
-                <img src={loader} alt="loader" />
-              </div>
-              <div className={style.resultloadertext}>Загрузка данных...</div>
-            </div>
-          )}
+         
           {isError && (
             <div className={style.resulterror}>
               Ошибка загрузки данных. Попробуйте зайти позднее.
@@ -151,7 +204,7 @@ const Result = () => {
             </h3>
             <p className={style.histogramstext}>Найдено 4 221 вариантов</p>
             <div className={style.histogramstable}>
-              <Histograms histogramItems={histogramItems} />
+              <Histograms histogramsItems={histogramsItems} isLoading={isLoading}/>
             </div>
           </section>
           <section className={style.documents}>

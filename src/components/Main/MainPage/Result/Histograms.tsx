@@ -4,63 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import arrowright from "./img/arrowright.svg";
 import { useEffect, useState } from "react";
-
-const vremData = [
-  {
-    period: "10.09.2021",
-    total: 5,
-    risks: 0,
-  },
-  {
-    period: "13.09.2021",
-    total: 2,
-    risks: 0,
-  },
-  {
-    period: "17.09.2021",
-    total: 6,
-    risks: 0,
-  },
-  {
-    period: "20.09.2021",
-    total: 8,
-    risks: 2,
-  },
-  {
-    period: "12.10.2021",
-    total: 1,
-    risks: 0,
-  },
-  {
-    period: "15.10.2021",
-    total: 10,
-    risks: 2,
-  },
-  {
-    period: "16.10.2021",
-    total: 4,
-    risks: 0,
-  },
-  {
-    period: "17.10.2021",
-    total: 3,
-    risks: 0,
-  },
-  {
-    period: "18.10.2021",
-    total: 6,
-    risks: 1,
-  },
-  {
-    period: "19.10.2021",
-    total: 4,
-    risks: 0,
-  },
-];
-
-interface IHistogramsProps {
-  histogramItems: any;
-}
+import loader from "../../../Header/img/loader.png";
 
 interface IHistogramsItem {
   period: string;
@@ -68,15 +12,21 @@ interface IHistogramsItem {
   risks: number;
 }
 
-const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
+interface IHistogramsProps {
+  histogramsItems: IHistogramsItem[];
+  isLoading: boolean;
+}
+
+const Histograms: React.FC<IHistogramsProps> = ({ histogramsItems, isLoading }) => {
   const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
 
   useEffect(() => {
-    if (histogramItems) {
-      //setDataItems(histogramItems);
-      setDataItems(vremData);
+    if (histogramsItems) {
+      setDataItems(histogramsItems);
+    } else {
+
     }
-  });
+  }, [histogramsItems]);
 
   const SlickButtonFix = ({
     currentSlide,
@@ -178,6 +128,14 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramItems }) => {
         </div>
         <div className={style.histogramsslider}>
           <Slider {...settings}>
+            {isLoading && (
+              <div className={style.loaderblock}>
+                <div className={style.resultloader}>
+                  <img src={loader} alt="loader" />
+                </div>
+                <div className={style.resultloadertext}>Загрузка данных...</div>
+              </div>
+            )}
             {dataItems.map((item, index) => (
               <div key={index} className={style.histogramsslideritem}>
                 <div className={style.histogramsslideritemceil}>
