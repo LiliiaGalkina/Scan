@@ -18,6 +18,7 @@ interface IHistogramsItem {
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [histogramsItems, setHistogramsItems] = useState<IHistogramsItem[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
   const [documetsItems, setDocumentsItems] = useState(null);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
@@ -56,10 +57,24 @@ const Result = () => {
          }
 
          const histogramsData = await histogramsRes.json();
+         const totalDocuments = histogramsData.data.find(
+           (histogram:any) => histogram.histogramType === "totalDocuments"
+         );
+           if (totalDocuments) {
+             const total = totalDocuments.data.reduce(
+               (sum:number, item:any) => sum + item.value,
+               0
+             );
+             setTotalCount(total);
+           }
          setHistogramsItems(histogramsData);
       } catch (err) {
          console.error("Ошибка при запросе данных с сервера:", err);
          try {
+          const totalLocal = localHistogramsData.reduce((sum, item) => sum + item.total, 0);
+          if(totalLocal){
+            setTotalCount(totalLocal);
+          }
            setHistogramsItems(localHistogramsData);
          } catch (err) {
           console.error("Ошибка при загрузке локальных данных:", err);
@@ -77,40 +92,7 @@ const Result = () => {
   //-----------------------------------------------------------------
 /*  const getResult = async () => {
    
-    const searchParams = location.state.searchParams;
-    if (!searchParams) {
-      console.log("Параметры поиска отсутствуют");
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    setIsError(false);
-
-    const histogramUrl =
-      "https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms";
-
-    try {
-      const histogramRes = await fetch(histogramUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(searchParams),
-        credentials: "omit",
-      }); 
-
-     if (!histogramRes.ok) {
-        throw new Error("Ошибка получения данных histograms с сервера");
-      }
-
-      const histogramData = await histogramRes.json();
-      console.log(histogramData);
-      setHistogramItems(histogramData);
-
-         const publicationIdUrl =
+            const publicationIdUrl =
         "https://gateway.scan-interfax.ru/api/v1/objectsearch";
 
       const publicationIdRes = await fetch(publicationIdUrl, {
@@ -202,9 +184,9 @@ const Result = () => {
             <h3 className={`${allstyles.title} ${style.histogramstitle}`}>
               Общая сводка
             </h3>
-            <p className={style.histogramstext}>Найдено 4 221 вариантов</p>
+            <p className={style.histogramstext}>Найдено {totalCount} вариантов</p>
             <div className={style.histogramstable}>
-              <Histograms histogramsItems={histogramsItems} isLoading={isLoading}/>
+              <Histograms histogramsItems={histogramsItems} isLoading={isLoading} />
             </div>
           </section>
           <section className={style.documents}>

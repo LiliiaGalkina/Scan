@@ -20,12 +20,11 @@ interface IHistogramsProps {
 const Histograms: React.FC<IHistogramsProps> = ({ histogramsItems, isLoading }) => {
   const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
 
+
   useEffect(() => {
     if (histogramsItems) {
       setDataItems(histogramsItems);
-    } else {
-
-    }
+    } 
   }, [histogramsItems]);
 
   const SlickButtonFix = ({
@@ -153,6 +152,14 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramsItems, isLoading }) 
         </div>
       </div>
       <div className={style.histogramsmobile}>
+        {isLoading && (
+          <div className={style.loaderblock}>
+            <div className={style.resultloader}>
+              <img src={loader} alt="loader" />
+            </div>
+            <div className={style.resultloadertext}>Загрузка данных...</div>
+          </div>
+        )}
         <div className={style.histogramsmobileslider}>
           <Slider {...settingsmobile}>
             {dataItems.map((item, index) => (
