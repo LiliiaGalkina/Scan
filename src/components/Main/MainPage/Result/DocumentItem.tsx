@@ -1,40 +1,28 @@
 import style from "./documentitem.module.scss";
-import vremitem from "./img/vremitem.png";
 import allstyle from "../../allstyle.module.scss";
 
-const DocumentItem = () => {
+
+
+const DocumentItem = (props: any) => {
+  const label = props.isTechNews ? "Технические новости": props.isAnnouncement ? "Анонсы и события" : "Сводки новостей";
     return (
       <div className={style.document}>
         <div className={style.info}>
-          <div className={style.date}>13.09.2021</div>
-          <a href="#" className={style.link}>
-            Комсомольская правда KP.RU
-          </a>
+          <div className={style.date}>{props.date}</div>
+          <a href={props.url} className={style.link}>{props.sourceName}</a>
         </div>
-        <h3 className={style.title}>
-          Скиллфэктори - лучшая онлайн-школа для будущих айтишников
-        </h3>
-        <div className={style.category}>Технические новости</div>
+        <h3 className={style.title}>{props.title} </h3>
+        <div className={style.category}>{label}</div>
         <div className={style.image}>
-          <img src={vremitem} alt="обложка статьи" />
+          <img src={props.picture} alt="обложка статьи" />
         </div>
-        <div className={style.text}>
-          SkillFactory — школа для всех, кто хочет изменить свою карьеру и
-          жизнь. С 2016 года обучение прошли 20 000+ человек из 40 стран с 4
-          континентов, самому взрослому студенту сейчас 86 лет. Выпускники
-          работают в Сбере, Cisco, Bayer, Nvidia, МТС, Ростелекоме, Mail.ru,
-          Яндексе, Ozon и других топовых компаниях. Принципы SkillFactory:
-          акцент на практике, забота о студентах и ориентир на трудоустройство.
-          80% обучения — выполнение упражнений и реальных проектов. Каждого
-          студента поддерживают менторы, 2 саппорт-линии и комьюнити курса. А
-          карьерный центр помогает составить резюме, подготовиться к
-          собеседованиям и познакомиться с IT-рекрутерами.
+        <div className={style.text}>{props.content}
         </div>
         <div className={style.documentfooter}>
           <a href="#" className={`${allstyle.button} ${style.documentbutton}`}>
             Читать в источнике
           </a>
-          <div className={style.countwords}>2 543 слова</div>
+          <div className={style.countwords}>{props.wordCount} слов(а)</div>
         </div>
       </div>
     );
