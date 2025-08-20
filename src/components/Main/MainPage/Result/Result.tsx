@@ -27,6 +27,7 @@ const Result = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [documetsItems, setDocumentsItems] = useState<any>(null);
   const [isGetDocumentsFromServer, setIsGetDocumentsFromServer] = useState(false);
+  const [isGetHistogramFromServer, setIsGetHistogramFromServer] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
 
@@ -62,19 +63,21 @@ const Result = () => {
 
         if (histogramRes.ok) {
           const histogramsData = await histogramRes.json();
+          setHistogramsItems(histogramsData);
           const totalDocuments = histogramsData.data.find(
             (histogram: any) => histogram.histogramType === "totalDocuments"
           );
           if (totalDocuments) {
             const total = totalDocuments.data.reduce(
               (sum: number, item: any) => sum + item.value,
-              0
+              0 
             );
             setTotalCount(total);
           }
-          setHistogramsItems(histogramsData);
+            setIsGetHistogramFromServer(true);
             setIsLoading(false);
         } else {
+          setHistogramsItems(localHistogramsData);
            const totalLocal = localHistogramsData.reduce(
              (sum, item) => sum + item.total,
              0
@@ -82,7 +85,7 @@ const Result = () => {
            if (totalLocal) {
              setTotalCount(totalLocal);
            }
-          setHistogramsItems(localHistogramsData);
+          setIsGetHistogramFromServer(false);
            setIsLoading(false);
         }
 
@@ -131,8 +134,9 @@ const Result = () => {
         setIsGetDocumentsFromServer(false);
         }
       } catch (err) {
-        console.error("Ошибка при выполнении запроса:", err);
-        setIsError(true);
+          setIsError(true);
+        throw new Error("Данных по указанным параметрам поиска не найдено. Вернитесь на страницу поиска и введите другие параметры.");
+     
       } finally {
         setIsDocumentsLoading(false);
       }
@@ -161,10 +165,10 @@ const Result = () => {
               />
             </div>
           </div>
-
           {isError && (
-            <div className={style.resulterror}>
-              Ошибка загрузки данных. Попробуйте зайти позднее.
+            <div className={style.error}>
+              "Данных по указанным параметрам поиска не найдено. Вернитесь на
+              страницу поиска и введите другие параметры."
             </div>
           )}
           <section className={style.histograms}>
@@ -178,6 +182,7 @@ const Result = () => {
               <Histograms
                 histogramsItems={histogramsItems}
                 isLoading={isLoading}
+                isGetHistogramFromServer={isGetHistogramFromServer}
               />
             </div>
           </section>
@@ -186,13 +191,13 @@ const Result = () => {
               Список документов
             </h2>
             {isDocumentsLoading && (
-                          <div className={style.loaderblockdocuments}>
-                            <div className={style.resultloader}>
-                              <img src={loader} alt="loader" />
-                            </div>
-                            <div className={style.resultloadertext}>Загрузка данных...</div>
-                          </div>
-                        )}
+              <div className={style.loaderblockdocuments}>
+                <div className={style.resultloader}>
+                  <img src={loader} alt="loader" />
+                </div>
+                <div className={style.resultloadertext}>Загрузка данных...</div>
+              </div>
+            )}
             <Documents
               documentsItems={documetsItems}
               isGetDocumentsFromServer={isGetDocumentsFromServer}

@@ -5,26 +5,42 @@ import "slick-carousel/slick/slick-theme.css";
 import arrowright from "./img/arrowright.svg";
 import { useEffect, useState } from "react";
 import loader from "../../../Header/img/loader.png";
+import {combineDataByDate } from "./helpers";
 
 interface IHistogramsItem {
-  period: string;
-  total: number;
-  risks: number;
+    period: string;
+    total: number;
+    risks: number;
+  
 }
 
 interface IHistogramsProps {
-  histogramsItems: IHistogramsItem[];
+  histogramsItems: any;
   isLoading: boolean;
+  isGetHistogramFromServer: boolean;
 }
 
-const Histograms: React.FC<IHistogramsProps> = ({ histogramsItems, isLoading }) => {
-  const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
 
+const Histograms: React.FC<IHistogramsProps> = ({
+  histogramsItems,
+  isLoading,
+  isGetHistogramFromServer
+}) => {
+  const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
+  const [isHistogramError, setIsHistogramError] = useState(false);
 
   useEffect(() => {
-    if (histogramsItems) {
-      setDataItems(histogramsItems);
-    } 
+   if(isGetHistogramFromServer){
+     if (histogramsItems.length > 0) {
+       setIsHistogramError(false);
+       const combined = combineDataByDate(histogramsItems.data);
+       setDataItems(combined);
+     } else {
+      setIsHistogramError(true);
+     }
+   } else {
+    setDataItems(histogramsItems)
+   }
   }, [histogramsItems]);
 
   const SlickButtonFix = ({
@@ -127,13 +143,16 @@ const Histograms: React.FC<IHistogramsProps> = ({ histogramsItems, isLoading }) 
         </div>
         <div className={style.histogramsslider}>
           <Slider {...settings}>
-            {isLoading && (
+            {isLoading && !isHistogramError && (
               <div className={style.loaderblock}>
                 <div className={style.resultloader}>
                   <img src={loader} alt="loader" />
                 </div>
                 <div className={style.resultloadertext}>Загрузка данных...</div>
               </div>
+            )}
+            {!isLoading && isHistogramError && (
+              <div className={style.histogramerror}>По заданным параметрам ничего не найдено. Вернитесь на страницу поиска и введите другие параметры</div>
             )}
             {dataItems.map((item, index) => (
               <div key={index} className={style.histogramsslideritem}>

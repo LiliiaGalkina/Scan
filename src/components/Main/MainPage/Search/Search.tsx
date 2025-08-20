@@ -84,35 +84,34 @@ export default function Search() {
     }
   };
 
-  const handleChangeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const now = new Date();
     const start = new Date(e.target.value);
 
     if (start > now) {
-      setStartDate(e.target.value);
+      
       setDateStartError("Дата не может быть позже текущей");
-      console.log(dateStartError);
+      
     } else if (start > new Date(endDate)) {
-      setStartDate(e.target.value);
+      
       setDateStartError("Дата начала периода не может быть больше даты конца");
     } else {
-      setStartDate(e.target.value);
+     
       setDateStartError("");
     }
   };
 
-  const handleChangeFinishDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const validateEndDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const now = new Date();
     const finish = new Date(e.target.value);
 
     if (finish > now) {
-      setEndDate(e.target.value);
-      setDateEndError("Дата не может быть позже текущей");
+       setDateEndError("Дата не может быть позже текущей");
     } else if (finish < new Date(startDate)) {
-      setEndDate(e.target.value);
+      
       setDateEndError("Дата конца периода не может быть меньше даты начала");
     } else {
-      setEndDate(e.target.value);
+     
       setDateEndError("");
     }
   };
@@ -313,7 +312,8 @@ export default function Search() {
                       name="start"
                       id="start"
                       value={startDate}
-                      onChange={handleChangeStartDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      onBlur={validateStartDate}
                       className={`${style.input} ${style.dateinput}`}
                       placeholder="Дата начала"
                       required
@@ -329,7 +329,8 @@ export default function Search() {
                       name="finish"
                       id="finish"
                       value={endDate}
-                      onChange={handleChangeFinishDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      onBlur={validateEndDate}
                       className={`${style.input} ${style.dateinput}`}
                       placeholder="Дата конца"
                       required
