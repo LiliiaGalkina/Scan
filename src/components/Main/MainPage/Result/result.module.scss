@@ -36,6 +36,14 @@
   align-items: center;
 }
 
+.loaderblockdocuments {
+  width: 100%;
+    padding: 2rem 0;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
+
 .resultloader {
   margin-bottom: 2rem;
   width: 7rem;
@@ -59,7 +67,7 @@
 /*histograms*/
 
 .histograms {
-  padding: 0 0 5.3rem;
+  padding-bottom: 5.3rem;
 }
 
 .histogramstitle {
@@ -147,7 +155,7 @@
 /*documents*/
 
 .documents {
-  padding: 5.4rem 0 10.9rem;
+  padding-top: 5.4rem;
 }
 
 .documentstitle {
@@ -156,14 +164,13 @@
 }
 
 .documentsitems {
-  margin-bottom: 3.8rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 3.8rem;
 }
 
 .buttonadddocuments {
-  margin: 0 auto;
+  margin: 3.8rem auto 0;
   width: 30.5rem;
   height: 5.9rem;
   border-radius: 0.5rem;
@@ -188,14 +195,7 @@
   }
 }
 
-@-webkit-keyframes rot {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 
 @keyframes text {
   0% {
@@ -239,6 +239,10 @@
     max-width: 100%;
   }
 
+  .histograms {
+  padding-bottom: 2.85rem;
+}
+
   .histogramsheader {
     font-size: 1.8rem;
   }
@@ -252,7 +256,7 @@
   }
 
   .documents {
-    padding: 2.4rem 0 5.7rem;
+    padding-top: 2.85rem;
   }
 
   .documentstitle {
@@ -261,12 +265,12 @@
 }
 
 .documentsitems {
-  margin-bottom: 3.6rem;
   grid-template-columns: 1fr;
   gap: 2rem;
 }
 
 .buttonadddocuments {
+  margin-top: 3.6rem;
   width: 33.5rem;
   font-size: 2rem;
   letter-spacing: 3%;

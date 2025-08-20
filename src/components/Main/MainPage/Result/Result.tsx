@@ -9,6 +9,7 @@ import {
   localDocuments
 } from "./localdata";
 import Documents from "./Documents";
+import loader from "../../../Header/img/loader.png";
 
 
 interface IHistogramsItem {
@@ -20,7 +21,8 @@ interface IHistogramsItem {
 
 
 const Result = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDocumentsLoading, setIsDocumentsLoading] = useState(false);
   const [histogramsItems, setHistogramsItems] = useState<IHistogramsItem[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [documetsItems, setDocumentsItems] = useState<any>(null);
@@ -40,6 +42,7 @@ const Result = () => {
       }
 
       setIsLoading(true);
+      setIsDocumentsLoading(true);
       setIsError(false);
 
       try {
@@ -70,6 +73,7 @@ const Result = () => {
             setTotalCount(total);
           }
           setHistogramsItems(histogramsData);
+            setIsLoading(false);
         } else {
            const totalLocal = localHistogramsData.reduce(
              (sum, item) => sum + item.total,
@@ -121,6 +125,7 @@ const Result = () => {
              setDocumentsItems(documentsData);
              setIsGetDocumentsFromServer(true);
            }
+           setIsDocumentsLoading(false);
        } else {
         setDocumentsItems(localDocuments);
         setIsGetDocumentsFromServer(false);
@@ -129,7 +134,7 @@ const Result = () => {
         console.error("Ошибка при выполнении запроса:", err);
         setIsError(true);
       } finally {
-       
+        setIsDocumentsLoading(false);
       }
     };
 
@@ -152,7 +157,7 @@ const Result = () => {
             <div className={style.resultimage}>
               <img
                 src={maimimgresult}
-                alt="женщина смотрит через лупу и дуржит в руках дартс"
+                alt="женщина смотрит через лупу и держит в руках дартс"
               />
             </div>
           </div>
@@ -180,15 +185,18 @@ const Result = () => {
             <h2 className={`${allstyles.title} ${style.documentstitle}`}>
               Список документов
             </h2>
+            {isDocumentsLoading && (
+                          <div className={style.loaderblockdocuments}>
+                            <div className={style.resultloader}>
+                              <img src={loader} alt="loader" />
+                            </div>
+                            <div className={style.resultloadertext}>Загрузка данных...</div>
+                          </div>
+                        )}
             <Documents
               documentsItems={documetsItems}
               isGetDocumentsFromServer={isGetDocumentsFromServer}
             />
-            <button
-              className={`${allstyles.button} ${style.buttonadddocuments}`}
-            >
-              Показать больше
-            </button>
           </section>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./result.module.scss";
 import docimage from "./img/article2.png";
 import DocumentItem from "./DocumentItem";
+import allstyles from "../../allstyle.module.scss";
 
 interface IDocumentsProps {
   documentsItems: any;
@@ -22,6 +23,8 @@ function cleanHtmlContent(htmlContent: string) {
 
 const Documents: React.FC<IDocumentsProps> = ({ documentsItems, isGetDocumentsFromServer }) => {
   const [documents, setDocuments] = useState<any>([]);
+   const [displayedArticles, setDisplayedArticles] = useState(2); 
+
 
   useEffect(() => {
     if (documentsItems && Array.isArray(documentsItems)){
@@ -47,12 +50,25 @@ const Documents: React.FC<IDocumentsProps> = ({ documentsItems, isGetDocumentsFr
     }
   }, [documentsItems]);
 
+   const showMoreArticles = () => {
+     setDisplayedArticles((prev) => prev + 2); // Показывать на две статьи больше
+   };
 
-  return <div className={style.documentsitems}>
-    {documents.map((doc: any, index:number) => (
-        <DocumentItem key={index} {...doc}/>
-    ))}
-  </div>;
+
+  return (
+    <>
+      <div className={style.documentsitems}>
+        {documents
+          .slice(0, displayedArticles)
+          .map((doc: any, index: number) => (
+            <DocumentItem key={index} {...doc} />
+          ))}
+      </div>
+      <button className={`${allstyles.button} ${style.buttonadddocuments}`} onClick={showMoreArticles} style={{display: displayedArticles < documents.length ? "block" : "none"}}>
+        Показать больше
+      </button>
+    </>
+  );
 };
 
 export default Documents;
