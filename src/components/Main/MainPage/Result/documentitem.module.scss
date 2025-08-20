@@ -94,6 +94,10 @@
         align-items: start;
     }
 
+    .title {
+        min-height: 12rem;
+    }
+
     .documentfooter {
         flex-direction: column-reverse;
         align-items: start;

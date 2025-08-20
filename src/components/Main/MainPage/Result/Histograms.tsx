@@ -5,13 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 import arrowright from "./img/arrowright.svg";
 import { useEffect, useState } from "react";
 import loader from "../../../Header/img/loader.png";
-import {combineDataByDate } from "./helpers";
+import { combineDataByDate } from "./helpers";
 
 interface IHistogramsItem {
-    period: string;
-    total: number;
-    risks: number;
-  
+  period: string;
+  total: number;
+  risks: number;
 }
 
 interface IHistogramsProps {
@@ -20,27 +19,26 @@ interface IHistogramsProps {
   isGetHistogramFromServer: boolean;
 }
 
-
 const Histograms: React.FC<IHistogramsProps> = ({
   histogramsItems,
   isLoading,
-  isGetHistogramFromServer
+  isGetHistogramFromServer,
 }) => {
   const [dataItems, setDataItems] = useState<IHistogramsItem[]>([]);
   const [isHistogramError, setIsHistogramError] = useState(false);
 
   useEffect(() => {
-   if(isGetHistogramFromServer){
-     if (histogramsItems.length > 0) {
-       setIsHistogramError(false);
-       const combined = combineDataByDate(histogramsItems.data);
-       setDataItems(combined);
-     } else {
-      setIsHistogramError(true);
-     }
-   } else {
-    setDataItems(histogramsItems)
-   }
+    if (isGetHistogramFromServer) {
+      if (histogramsItems.length > 0) {
+        setIsHistogramError(false);
+        const combined = combineDataByDate(histogramsItems.data);
+        setDataItems(combined);
+      } else {
+        setIsHistogramError(true);
+      }
+    } else {
+      setDataItems(histogramsItems);
+    }
   }, [histogramsItems]);
 
   const SlickButtonFix = ({
@@ -135,6 +133,12 @@ const Histograms: React.FC<IHistogramsProps> = ({
   };
   return (
     <>
+      {!isLoading && isHistogramError && (
+        <div className={style.histogramerror}>
+          По заданным параметрам ничего не найдено. Вернитесь на страницу поиска
+          и введите другие параметры
+        </div>
+      )}
       <div className={style.histogramsblock}>
         <div className={style.histogramsheader}>
           <div className={style.histogramsheaderitem}>Период</div>
@@ -151,9 +155,7 @@ const Histograms: React.FC<IHistogramsProps> = ({
                 <div className={style.resultloadertext}>Загрузка данных...</div>
               </div>
             )}
-            {!isLoading && isHistogramError && (
-              <div className={style.histogramerror}>По заданным параметрам ничего не найдено. Вернитесь на страницу поиска и введите другие параметры</div>
-            )}
+
             {dataItems.map((item, index) => (
               <div key={index} className={style.histogramsslideritem}>
                 <div className={style.histogramsslideritemceil}>
