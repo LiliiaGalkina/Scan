@@ -61,7 +61,6 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
      }
    };
 
-
   const handleMenuOpen = () => {
     setIsMenuOpen(!isMenuOpen);
     if (logoImg === logomain) {

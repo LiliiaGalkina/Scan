@@ -72,10 +72,9 @@ const Autification: React.FC<IAutificationProps> = () => {
     }
   };
 
-  const handleChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-   const loginRegex = /^[[\w-]+$/i;
-   const phoneRegex = /^[\d\+][\d\(\)\ -]{4,14}\d$/;
-     setUsername(e.target.value);
+  const validateUsername = () => {
+    const loginRegex = /^[[\w-]+$/i;
+    const phoneRegex = /^[\d\+][\d\(\)\ -]{4,14}\d$/;
     if (loginRegex.test(username)) {
       setUsernameWrong(false);
     } else if (phoneRegex.test(username)) {
@@ -83,7 +82,7 @@ const Autification: React.FC<IAutificationProps> = () => {
     } else {
       setUsernameWrong(true);
     }
-  };
+  }
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -119,7 +118,8 @@ const Autification: React.FC<IAutificationProps> = () => {
                 name="username"
                 value={username}
                 className={style.authinput}
-                onChange={handleChangeUsername}
+                onChange={(e) => setUsername(e.target.value)}
+                onBlur={validateUsername}
                 required
                 style={{ borderColor: usernameWrong ? "#FF5959" : "" }}
               />

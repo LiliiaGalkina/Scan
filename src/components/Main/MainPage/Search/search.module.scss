@@ -86,6 +86,7 @@
   background-image: url("./img/selectarrow.png");
   background-repeat: no-repeat;
   background-position: right 1.56rem top 50%, 0 0;
+  cursor: pointer;
 }
 
 .inputinfo {
@@ -114,6 +115,7 @@
   accent-color: #ffffff;
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
 }
 
 .checkboxtext {
@@ -318,5 +320,11 @@
 
   .searchmainimg {
     width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .checkboxes {
+    display: none;
   }
 }
