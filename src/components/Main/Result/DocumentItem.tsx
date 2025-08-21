@@ -1,5 +1,5 @@
 import style from "./documentitem.module.scss";
-import allstyle from "../../allstyle.module.scss";
+import allstyle from "../allstyle.module.scss";
 
 const DocumentItem = (props: any) => {
   const label = props.isTechNews ? "Технические новости": props.isAnnouncement ? "Анонсы и события" : "Сводки новостей";

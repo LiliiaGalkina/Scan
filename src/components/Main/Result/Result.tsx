@@ -2,11 +2,11 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import maimimgresult from "./img/mainimgresult.svg";
 import style from "./result.module.scss";
-import allstyles from "../../allstyle.module.scss";
+import allstyles from "../allstyle.module.scss";
 import Histograms from "./Histograms";
 import { localHistogramsData, localDocuments } from "./localdata";
 import Documents from "./Documents";
-import loader from "../../../Header/img/loader.png";
+import loader from "/image/loader.png";
 
 interface IHistogramsItem {
   period: string;
@@ -49,7 +49,7 @@ const Result = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(searchParams),
             credentials: "omit",
@@ -93,7 +93,7 @@ const Result = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
             },
             body: JSON.stringify(searchParams),
             credentials: "omit",
@@ -113,7 +113,7 @@ const Result = () => {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
               },
               body: JSON.stringify({ ids: publicationIds }),
               credentials: "omit",

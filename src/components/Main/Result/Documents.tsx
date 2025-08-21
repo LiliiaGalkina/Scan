@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./result.module.scss";
 import docimage from "./img/article2.png";
 import DocumentItem from "./DocumentItem";
-import allstyles from "../../allstyle.module.scss";
+import allstyles from "../allstyle.module.scss";
 
 interface IDocumentsProps {
   documentsItems: any;

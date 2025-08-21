@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import arrowright from "./img/arrowright.svg";
 import { useEffect, useState } from "react";
-import loader from "../../../Header/img/loader.png";
+import loader from "/image/loader.png";
 import { combineDataByDate } from "./helpers";
 
 interface IHistogramsItem {

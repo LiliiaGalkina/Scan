@@ -6,7 +6,7 @@ import user from "./img/user.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import loader from "./img/loader.png";
+import loader from "/image/loader.png";
 
 interface IHeaderProps {
   isAuth: boolean;

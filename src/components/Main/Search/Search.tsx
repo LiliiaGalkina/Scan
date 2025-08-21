@@ -1,5 +1,5 @@
 import style from "./search.module.scss";
-import allstyles from "../../allstyle.module.scss";
+import allstyles from "../allstyle.module.scss";
 import mainimg from "./img/mainimg.svg";
 import documentlist from "./img/Document.svg";
 import folders from "./img/Folders.svg";
