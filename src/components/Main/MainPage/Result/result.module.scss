@@ -60,7 +60,7 @@
 
 .resulterror {
   padding: 5rem 0;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #ff0000;
 }
 
@@ -359,5 +359,9 @@
   .loaderblock {
     margin: 0 auto;
     width: 15rem;
+  }
+
+  .resulterror {
+    font-size: 1.6rem;
   }
 }

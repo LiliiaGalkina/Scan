@@ -4,13 +4,9 @@ import maimimgresult from "./img/mainimgresult.svg";
 import style from "./result.module.scss";
 import allstyles from "../../allstyle.module.scss";
 import Histograms from "./Histograms";
-import {
-  localHistogramsData,
-  localDocuments
-} from "./localdata";
+import { localHistogramsData, localDocuments } from "./localdata";
 import Documents from "./Documents";
 import loader from "../../../Header/img/loader.png";
-
 
 interface IHistogramsItem {
   period: string;
@@ -18,20 +14,19 @@ interface IHistogramsItem {
   risks: number;
 }
 
-
-
 const Result = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDocumentsLoading, setIsDocumentsLoading] = useState(false);
   const [histogramsItems, setHistogramsItems] = useState<IHistogramsItem[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [documetsItems, setDocumentsItems] = useState<any>(null);
-  const [isGetDocumentsFromServer, setIsGetDocumentsFromServer] = useState(false);
-  const [isGetHistogramFromServer, setIsGetHistogramFromServer] = useState(false);
+  const [isGetDocumentsFromServer, setIsGetDocumentsFromServer] =
+    useState(false);
+  const [isGetHistogramFromServer, setIsGetHistogramFromServer] =
+    useState(false);
   const [isError, setIsError] = useState(false);
+  const [isErrorServer, setIsErrorServer] = useState(false);
   const location = useLocation();
-
-  
 
   useEffect(() => {
     const getResults = async () => {
@@ -48,7 +43,7 @@ const Result = () => {
 
       try {
         //histograms
-        const histogramRes= await fetch(
+        const histogramRes = await fetch(
           "https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms",
           {
             method: "POST",
@@ -70,23 +65,25 @@ const Result = () => {
           if (totalDocuments) {
             const total = totalDocuments.data.reduce(
               (sum: number, item: any) => sum + item.value,
-              0 
+              0
             );
             setTotalCount(total);
           }
-            setIsGetHistogramFromServer(true);
-            setIsLoading(false);
+          setIsGetHistogramFromServer(true);
+          setIsLoading(false);
+          setIsErrorServer(false);
         } else {
           setHistogramsItems(localHistogramsData);
-           const totalLocal = localHistogramsData.reduce(
-             (sum, item) => sum + item.total,
-             0
-           );
-           if (totalLocal) {
-             setTotalCount(totalLocal);
-           }
+          const totalLocal = localHistogramsData.reduce(
+            (sum, item) => sum + item.total,
+            0
+          );
+          if (totalLocal) {
+            setTotalCount(totalLocal);
+          }
           setIsGetHistogramFromServer(false);
-           setIsLoading(false);
+          setIsLoading(false);
+          setIsErrorServer(true);
         }
 
         //ids
@@ -103,40 +100,43 @@ const Result = () => {
           }
         );
 
-       if (publicationIdsResponse.ok) {
-         const publicationIdsData = await publicationIdsResponse.json();
-         const publicationIds = publicationIdsData.items.map(
-           (item: any) => item.encodedId
-         );
+        if (publicationIdsResponse.ok) {
+          const publicationIdsData = await publicationIdsResponse.json();
+          const publicationIds = publicationIdsData.items.map(
+            (item: any) => item.encodedId
+          );
 
-         // documents
-         const documentsResponse = await fetch(
-           "https://gateway.scan-interfax.ru/api/v1/documents",
-           {
-             method: "POST",
-             headers: {
-               "Content-Type": "application/json",
-               Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-             },
-             body: JSON.stringify({ ids: publicationIds }),
-             credentials: "omit",
-           }
-         );
+          // documents
+          const documentsResponse = await fetch(
+            "https://gateway.scan-interfax.ru/api/v1/documents",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+              },
+              body: JSON.stringify({ ids: publicationIds }),
+              credentials: "omit",
+            }
+          );
 
-           if (documentsResponse.ok) {
-             const documentsData = await documentsResponse.json();
-             setDocumentsItems(documentsData);
-             setIsGetDocumentsFromServer(true);
-           }
-           setIsDocumentsLoading(false);
-       } else {
-        setDocumentsItems(localDocuments);
-        setIsGetDocumentsFromServer(false);
+          if (documentsResponse.ok) {
+            const documentsData = await documentsResponse.json();
+            setDocumentsItems(documentsData);
+            setIsGetDocumentsFromServer(true);
+          }
+          setIsDocumentsLoading(false);
+          setIsErrorServer(false);
+        } else {
+          setDocumentsItems(localDocuments);
+          setIsGetDocumentsFromServer(false);
+          setIsErrorServer(true);
         }
       } catch (err) {
-          setIsError(true);
-        throw new Error("Данных по указанным параметрам поиска не найдено. Вернитесь на страницу поиска и введите другие параметры.");
-     
+        setIsError(true);
+        throw new Error(
+          "Данных по указанным параметрам поиска не найдено. Вернитесь на страницу поиска и введите другие параметры."
+        );
       } finally {
         setIsDocumentsLoading(false);
       }
@@ -172,12 +172,19 @@ const Result = () => {
             </div>
           )}
           <section className={style.histograms}>
+            {isErrorServer && (
+              <div className={style.resulterror}>
+                Ошибка подключения к серверу. Попробуйте повторить запрос
+                позднее. На данный момент используются локальные данные.
+              </div>
+            )}
             <h3 className={`${allstyles.title} ${style.histogramstitle}`}>
               Общая сводка
             </h3>
             <p className={style.histogramstext}>
               Найдено {totalCount} вариантов
             </p>
+
             <div className={style.histogramstable}>
               <Histograms
                 histogramsItems={histogramsItems}
