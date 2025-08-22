@@ -89,14 +89,10 @@ export default function Search() {
     const start = new Date(e.target.value);
 
     if (start > now) {
-      
       setDateStartError("Дата не может быть позже текущей");
-      
     } else if (start > new Date(endDate)) {
-      
       setDateStartError("Дата начала периода не может быть больше даты конца");
     } else {
-     
       setDateStartError("");
     }
   };
@@ -106,12 +102,11 @@ export default function Search() {
     const finish = new Date(e.target.value);
 
     if (finish > now) {
-       setDateEndError("Дата не может быть позже текущей");
+      setDateEndError("Дата не может быть позже текущей");
     } else if (finish < new Date(startDate)) {
       
       setDateEndError("Дата конца периода не может быть меньше даты начала");
     } else {
-     
       setDateEndError("");
     }
   };
