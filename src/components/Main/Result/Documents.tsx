@@ -23,8 +23,7 @@ function cleanHtmlContent(htmlContent: string) {
 
 const Documents: React.FC<IDocumentsProps> = ({ documentsItems, isGetDocumentsFromServer }) => {
   const [documents, setDocuments] = useState<any>([]);
-   const [displayedArticles, setDisplayedArticles] = useState(2); 
-
+  const [displayedArticles, setDisplayedArticles] = useState(2); 
 
   useEffect(() => {
     if (documentsItems && Array.isArray(documentsItems)){
@@ -50,9 +49,9 @@ const Documents: React.FC<IDocumentsProps> = ({ documentsItems, isGetDocumentsFr
     }
   }, [documentsItems]);
 
-   const showMoreArticles = () => {
+  const showMoreArticles = () => {
      setDisplayedArticles((prev) => prev + 2); // Показывать на две статьи больше
-   };
+  };
 
 
   return (

@@ -2,9 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./reset.scss";
 import "./App.scss";
 import Header from "./components/Header/Header";
-
 import Footer from "./components/Footer/Footer";
-
 import "./components/fonts/ferry.otf";
 import MainPage from "./components/Main/MainPage/MainPage";
 import Autification from "./components/Main/Autification/Autification";

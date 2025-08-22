@@ -26,8 +26,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [companyLimit, setCompanyLimit] = useState(0);
 	const [isGetting, setIsGetting] = useState(false);
 
-
-
    const checkAuth = () => {
      const accessToken = localStorage.getItem("accessToken");
      const tokenExpire = localStorage.getItem("tokenExpire");

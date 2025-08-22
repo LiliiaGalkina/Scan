@@ -19,8 +19,6 @@ import allstyle from "../../allstyle.module.scss"
     beige?:string;
 }
 
-
-
 const TarifCard: React.FC<TarifCardProps> = ({title, text, image, price, oldprice, buttonname, tariffitems, colortitle, colorbutton, dopinfo, beige, colorheader, colorborder, colorbuttonname}) => {
     return (
         <div className={style.card}>
