@@ -130,7 +130,7 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
                 }`}
               >
                 <li className={style.menuitem}>
-                  <a href="/" className={style.menulink}>
+                  <a href="/Scan" className={style.menulink}>
                     Главная
                   </a>
                 </li>
