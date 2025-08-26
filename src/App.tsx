@@ -24,7 +24,7 @@ function App() {
       <div className="wrapper">
 			  <Header isAuth={isAuth} userName={userName} />
         <Routes>
-          <Route path="/Scan"></Route>
+          <Route path="/Scan/"></Route>
 				  <Route path="/" element={<MainPage isAuth={isAuth} tarif={tarif} />} />
           <Route path="/auth" element={<Autification />} />
           <Route
