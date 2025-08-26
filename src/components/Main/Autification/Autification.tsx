@@ -32,7 +32,7 @@ const Autification: React.FC<IAutificationProps> = () => {
 	  if (isAuth) {
     
 		setTarif("beginner");
-      navigate("/");
+      navigate("/Scan");
     }
   }, [isAuth, navigate]);
 
