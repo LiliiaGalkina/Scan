@@ -104,7 +104,7 @@ const Header: React.FC<IHeaderProps> = ({ isAuth, userName }) => {
     handleMenuOpen();
     localStorage.removeItem("accessToken");
     localStorage.removeItem("tokenExpire");
-    navigate("/");
+    navigate("/Scan");
   };
 
   return (

@@ -61,7 +61,7 @@ const Autification: React.FC<IAutificationProps> = () => {
         localStorage.setItem("tokenExpire", data.expire);
         setIsAuth(true);
         setUserName(username);
-        navigate("/");
+        navigate("/Scan");
       } else {
         throw new Error(data.message || "Ошибка при входе");
       }
