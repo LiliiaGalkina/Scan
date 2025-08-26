@@ -20,7 +20,7 @@ interface IAuthRes {
 }
 
 const Autification: React.FC<IAutificationProps> = () => {
-  const { isAuth, setIsAuth, setUserName, setTarif, setCompanyCount, setCompanyLimit, setIsGetting } = useAuth();
+  const { isAuth, setIsAuth, setUserName, setTarif} = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [usernameWrong, setUsernameWrong] = useState(false);
