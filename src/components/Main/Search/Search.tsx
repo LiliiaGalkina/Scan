@@ -78,7 +78,7 @@ export default function Search() {
     count = Number(count);
 
     if (count < 1 || count > 1000) {
-      setCountError("Введите число > 0 и < 1000");
+      setCountError("Введите число >= 1 и < 1000");
     } else {
       setCountError("");
     }
