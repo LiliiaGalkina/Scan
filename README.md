@@ -1,69 +1,65 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Постановка задачи
+Компания «СКАН» разработала новый API для поиска публикаций о компании (юридическом лице) в средствах массовой информации по ИНН. Серверная часть приложения уже готова, ваша задача — разработать клиентскую часть.
 
-Currently, two official plugins are available:
+Функциональные требования
+----------------------------
+Клиентская часть сервиса состоит из:
+главной страницы,
+формы авторизации,
+формы для ввода параметров запроса,
+страницы с выводом результатов запроса.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Макет, подготовленный дизайнерами, находится здесь: https://www.figma.com/design/u3MOjzYnTnirz712GrLbFv/%D0%9C%D0%B0%D0%BA%D0%B5%D1%82-%D0%A1%D0%9A%D0%90%D0%9D?node-id=0-1&p=f&t=4EoeX9H9soYoRQ9l-0
 
-## Expanding the ESLint configuration
+Шапка сайта
+------------
+В ней находятся:
+логотип,
+меню,
+панель управления учётной записью.
+Страницы «Тарифы» и «FAQ» выходят за рамки данного ТЗ. Поэтому ссылки на них можно оставить пустыми или прописать фейковые URL-адреса.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Шапка сайта выглядит по-разному для авторизованного и неавторизованного пользователя.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Главная страница
+----------------
+Главная страница содержит описание сервиса и доступна всем пользователям без авторизации.
+Обратите внимание на следующие пункты:
+Кнопка «Запросить данные» ведёт на страницу ввода параметров поиска. Её должен видеть только зарегистрированный пользователь.
+Карточки в разделе «Почему именно мы» должны переключаться по принципу карусели: клик на стрелке слева или справа переключает карточки в соответствующем направлении.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Вы можете добавить произвольное количество карточек (или продублировать уже имеющиеся), чтобы протестировать работу карусели.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+В разделе «Наши тарифы» перечислены возможные тарифы. Кнопка «Подробнее» — заглушка, при клике на неё ничего не происходит.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Если пользователь авторизован, карточка с используемым им тарифом должна отличаться от остальных:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+появляется бейдж «Текущий тариф»;
+кнопка «Подробнее» меняется на «Перейти в личный кабинет» (она тоже не функциональна);
+карточка выделяется цветом, который соответствует тарифу.
+
+
+Форма авторизации
+--------------------
+Эта страница содержит форму с полями для ввода логина и пароля. При заполнении пароля вводимое значение должно маскироваться.
+При отсутствии одного из значений — логина или пароля — кнопка «Войти» неактивна, и при клике на неё ничего не происходит.
+После ввода всех необходимых значений кнопка становится активной. При нажатии на неё нужно отправить запрос на POST account/login
+При успешной авторизации в ответе на запрос придут:
+
+токен авторизации (accessToken),
+дата, до которой токен действителен (expire).
+Эти данные необходимо сохранить в localStorage, чтобы пользователю не нужно было заново авторизоваться после каждого обновления страницы.
+
+
+Форма для ввода параметров запроса
+----------------------------------------
+Данная страница содержит основу функционала сервиса: форму, в которой пользователь задаёт параметры поиска.
+Эта страница доступна только авторизованным пользователям. Если неавторизованный пользователь пытается её открыть, нужно переадресовать его на главную страницу сервиса.
+
+
+Вывод результатов поиска
+---------------------------
+Здесь мы выводим результаты ранее введённого запроса. Этот раздел необязательно делать физически отдельной страницей (присваивать свой URL-адрес). Можно отобразить его поверх формы поиска после отправки запроса.
