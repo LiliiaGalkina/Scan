@@ -24,7 +24,7 @@ const TarifCard: React.FC<TarifCardProps> = ({title, text, image, price, oldpric
         <div className={style.card}>
             <div className={style.cardheader} style={{backgroundColor: colorheader, color:colortitle}}>
                 <div className={style.cardheadertextblock}>
-                    <h4 className={style.cardtitle}>{title}</h4>
+                    <h3 className={style.cardtitle}>{title}</h3>
                     <p className={style.cardtext}>{text}</p>
                 </div>
                 <div className={style.cardimage}><img src={image} alt="icon" /></div>

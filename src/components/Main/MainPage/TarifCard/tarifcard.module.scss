@@ -40,13 +40,14 @@
 
 .cardbody {
     position: relative;
-    padding: 3.3rem 3rem 2.4rem;
+    padding: 3.3rem 2rem 2.4rem;
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     border-radius: 0 0 1rem 1rem;
     letter-spacing: 1%;
+
 }
 
 .priceblock {
@@ -80,7 +81,6 @@
 }
 
 .dopindo {
-    margin-right: -1.9rem;
     margin-bottom: 5.9rem;
     font-size: 1.8rem;
 }
